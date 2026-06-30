@@ -1,0 +1,8 @@
+/* Canonical brand tokens — activate only inside .brand-for-and-against */
+.brand-for-and-against {
+  --fa-ink: #1a1a1a;
+  --fa-paper: #f5f2eb;
+  --fa-accent: #3d2e24;
+  --fa-muted: #6b6560;
+  --fa-grid: rgba(26, 26, 26, 0.12);
+}

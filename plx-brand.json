@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "plx-brand/v1",
+  "repoKind": "marketing-brand",
+  "brand": {
+    "slug": "for-and-against",
+    "displayName": "For & Against"
+  },
+  "designSystem": {
+    "adoptsPlxTokens": false,
+    "tokenPrefix": "--fa-",
+    "boundaryClass": "brand-for-and-against",
+    "decidedBy": "vince",
+    "decidedAt": "2026-06-30",
+    "rationale": "Consumer-facing For & Against brand; own token layer; PLX-structure bundle."
+  },
+  "mc": {
+    "github": "Petra-Lab-X/for-and-against",
+    "registryId": "for-and-against"
+  },
+  "sharedBrandSpine": {
+    "wordmark": true,
+    "periodicMark": false,
+    "favicons": true
+  }
+}

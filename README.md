@@ -1,9 +1,13 @@
 # For & Against
 
-Consumer brand repository for **For & Against**, governed by PLX Mission Control.
+Consumer brand repository for **For & Against** (forandagainstbodycare.com), governed by PLX Mission Control.
 
-- GitHub: `Petra-Lab-X/for-and-against`
+- GitHub: `petralabx/for-and-against`
 - MC registry id: `for-and-against`
-- Design system: brand-local tokens (--fa-) — not PLX portal `--p-*`
+- Live surfaces: Amazon Store (US) + Webflow site
 
-See `docs/design-system/README.md` and `plx-brand.json`.
+**Start here:** [AGENTS.md](AGENTS.md) (repo map, source-of-truth rules, guardrails).
+
+Canonical product data: [data/products.json](data/products.json). Webflow ops context: [site/](site/). Brand voice: [docs/brand/voice.md](docs/brand/voice.md).
+
+`docs/design-system/` is maintained separately from brand-ops / Webflow work — see AGENTS.md.

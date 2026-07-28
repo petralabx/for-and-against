@@ -1,0 +1,172 @@
+{
+  "_meta": {
+    "purpose": "Watch list for the competitor price tracker. A scheduled GitHub Action (to be built) pulls price/deal/coupon status for every ASIN here and writes snapshots to data/pricing/history/.",
+    "last_verified": "2026-07-14",
+    "data_source": "TBD \u2014 Keepa API recommended for competitor ASINs, Amazon SP-API for own listings. Keys go in GitHub Actions Secrets, never in this repo.",
+    "alert_thresholds": {
+      "competitor_price_drop_pct": 10,
+      "any_coupon_or_deal": true
+    }
+  },
+  "own_asins": [
+    {
+      "asin": "B0C5KBKRT6",
+      "sku": "FNA100-500",
+      "label": "Amber & Sandalwood Shampoo 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GHSYTD49",
+      "sku": "FNA105-500",
+      "label": "Hinoki & Bergamot Shampoo 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GHSNG5X5",
+      "sku": "FNA106-500",
+      "label": "Santal & Vetiver Shampoo 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0C82Y2YGM",
+      "sku": "FNA200-500",
+      "label": "Amber & Sandalwood Conditioner 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GQCYMK1C",
+      "sku": "FNA205-500",
+      "label": "Hinoki & Bergamot Conditioner 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GQDRQ66N",
+      "sku": "FNA206-500",
+      "label": "Santal & Vetiver Conditioner 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0C82VV6ZB",
+      "sku": "FNA300-500",
+      "label": "Amber & Sandalwood Body Wash 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GHT7R3ZJ",
+      "sku": "FNA305-500",
+      "label": "Hinoki & Bergamot Body Wash 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GHT7YVVP",
+      "sku": "FNA306-500",
+      "label": "Santal & Vetiver Body Wash 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GR6RFFM1",
+      "sku": "FNA500-500",
+      "label": "Amber & Sandalwood Hand Soap 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GR6L9CWQ",
+      "sku": "FNA505-500",
+      "label": "Hinoki & Bergamot Hand Soap 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GR6VFNCD",
+      "sku": "FNA506-500",
+      "label": "Santal & Vetiver Hand Soap 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0CBW2QJT5",
+      "sku": "FNA600-500",
+      "label": "Amber & Sandalwood Body Lotion 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GQD9846M",
+      "sku": "FNA605-500",
+      "label": "Hinoki & Bergamot Body Lotion 500ml Retail Bottle"
+    },
+    {
+      "asin": "B0GJ12WMML",
+      "sku": "FNA100-2LP",
+      "label": "Amber & Sandalwood Shampoo 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GJ17R86F",
+      "sku": "FNA105-2LP",
+      "label": "Hinoki & Bergamot Shampoo 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GJ16QHSH",
+      "sku": "FNA106-2LP",
+      "label": "Santal & Vetiver Shampoo 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GR6R8JGV",
+      "sku": "FNA200-2LP",
+      "label": "Amber & Sandalwood Conditioner 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GR6NXNJK",
+      "sku": "FNA205-2LP",
+      "label": "Hinoki & Bergamot Conditioner 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GR6VHYFD",
+      "sku": "FNA206-2LP",
+      "label": "Santal & Vetiver Conditioner 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GJG6LPT3",
+      "sku": "FNA300-2LP",
+      "label": "Amber & Sandalwood Body Wash 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GJGDC7WF",
+      "sku": "FNA305-2LP",
+      "label": "Hinoki & Bergamot Body Wash 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GJG5GHSX",
+      "sku": "FNA306-2LP",
+      "label": "Santal & Vetiver Body Wash 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GR6W6L21",
+      "sku": "FNA605-2LP",
+      "label": "Hinoki & Bergamot Body Lotion 2L Refill Pouch"
+    },
+    {
+      "asin": "B0GR6NYFQY",
+      "sku": "FNA606-2LP",
+      "label": "Santal & Vetiver Body Lotion 2L Refill Pouch"
+    },
+    {
+      "asin": "B0FK7PKHFY",
+      "sku": "FNA750-75",
+      "label": "Amber & Sandalwood Deodorant 75g Stick"
+    },
+    {
+      "asin": "B0FK6LXRWS",
+      "sku": "FNA755-75",
+      "label": "Hinoki & Bergamot Deodorant 75g Stick"
+    },
+    {
+      "asin": "B0FFD1NHW2",
+      "sku": "FNA756-75",
+      "label": "Santal & Vetiver Deodorant 75g Stick"
+    },
+    {
+      "asin": "B0FK78HMKV",
+      "sku": "FNA757-75",
+      "label": "Waterlily & Bamboo Deodorant 75g Stick"
+    },
+    {
+      "asin": "B0FK7C39D7",
+      "sku": "FNA758-75",
+      "label": "Tobacco & Vanilla Deodorant 75g Stick"
+    }
+  ],
+  "competitor_asins": [
+    {
+      "asin": "",
+      "brand": "Salt & Stone",
+      "product": "",
+      "maps_to_sku": "",
+      "notes": "Populate from the Jungle Scout export source ASINs \u2014 see data/keywords/2026-07/README.md"
+    }
+  ]
+}

@@ -33,9 +33,11 @@ Premium body care positioned as the accessible-luxury alternative to Salt & Ston
 
 ## Workflow discipline
 
+- **Start of session:** `git checkout main && git pull`, then read the latest entries in `docs/sessions.md` (and `docs/learnings.md` before touching Amazon copy).
 - Copy changes to live surfaces (Amazon listings, Webflow CMS) go through PR review — never direct to `main`.
 - New approved copy lands in `copy/`; failed experiments get logged in `docs/learnings.md`.
 - Catalog/price changes: update `data/products.json` first, then CMS / listing files.
+- **End of session / before merge:** append a short entry to `docs/sessions.md` in the same PR (who, PR, done, next, watch).
 
 ## Repo map
 
@@ -48,6 +50,7 @@ Premium body care positioned as the accessible-luxury alternative to Salt & Ston
 | `docs/wholesale/` | Distributor/retail strategy, bulk SKUs |
 | `docs/analytics/` | KPI definitions |
 | `docs/learnings.md` | Experiment log + known-issue log |
+| `docs/sessions.md` | Append-only session handoff (read first, write last) |
 | `docs/design-system/` | Separate — do not modify for brand-ops tasks |
 | `site/` | Webflow: CMS schema, custom code, SEO, infra, CMS backups |
 | `data/` | `products.json` (canonical), pricing watch list, keyword snapshots |

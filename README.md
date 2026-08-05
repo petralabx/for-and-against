@@ -6,7 +6,7 @@ Consumer brand repository for **For & Against** (forandagainstbodycare.com), gov
 - MC registry id: `for-and-against`
 - Live surfaces: Amazon Store (US) + Webflow site
 
-**Start here:** [AGENTS.md](AGENTS.md) (repo map, source-of-truth rules, guardrails).
+**Start here:** [AGENTS.md](AGENTS.md) (repo map, source-of-truth rules, guardrails). After `git pull`, skim [docs/sessions.md](docs/sessions.md) for the latest handoff.
 
 Canonical product data: [data/products.json](data/products.json). Webflow ops context: [site/](site/). Brand voice: [docs/brand/voice.md](docs/brand/voice.md).
 

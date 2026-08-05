@@ -30,7 +30,7 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 ## 2026-08-05 — session log convention added
 
 - **Who:** Stephen + Cursor
-- **PR:** pending
+- **PR:** #10
 - **Done:** Added this file; wired start/end-of-session discipline into `AGENTS.md`
 - **Next:** Colleagues pull `main`, read latest entries before starting; append an entry with each meaningful PR
 - **Watch:** Soft MC compliance — operator PRs do not need `MC-Checkout`

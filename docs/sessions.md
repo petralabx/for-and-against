@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-05 — 2026-07 keyword snapshots imported
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `add-2026-07-keyword-snapshots` branch)
+- **Done:** Imported the deferred 2026-07 Jungle Scout keyword export set into `data/keywords/2026-07/` — body wash, shampoo, conditioner, and lotion across retail/refill-pouch/gallon-case formats (10 files). Each trimmed to top 140 keywords by search volume rather than the full raw export; see `data/keywords/2026-07/README.md` for methodology.
+- **Next:** `docs/channels/paid-ads.md` still needs the Phase 1/2 Google Ads plan (budget split, campaign structure) written in using this data. Deodorant and Amber & Sandalwood keyword pulls are not included in this snapshot (A&S is being discontinued).
+- **Watch:** These are trimmed snapshots, not full raw exports — if deeper long-tail keyword analysis is needed later, re-pull from Jungle Scout rather than assuming this file is exhaustive.
+
 ## 2026-08-05 — session log convention added
 
 - **Who:** Stephen + Cursor

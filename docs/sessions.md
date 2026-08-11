@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-11 — Amazon Attribution structure documented
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `docs/amazon-attribution-structure` branch)
+- **Done:** Added `docs/channels/amazon-attribution.md` — campaign/ad group/tag hierarchy, current ad group lists for both the `For & Against Website` and `For & Against — Google Ads` campaigns, naming convention, campaign-level product pool rule, URL handling rules, and platform quirks (no native delete, wizard closing after campaign creation, per-SKU eligibility gaps). Cross-linked from `docs/channels/amazon.md`.
+- **Next:** `docs/channels/paid-ads.md` (PR #13, not yet merged) has a placeholder reference to this doc that should be swapped for a real link once both PRs land — whichever merges second should update the link. A tag-name → tracking-URL → Google Ads-keyword mapping doc is still unbuilt; recommended once the Google Ads ad group count grows.
+- **Watch:** This branch was cut from `main` before PR #13 merged, so it doesn't carry that PR's `paid-ads.md` changes — no conflict expected since different files were touched, but worth double-checking on merge.
+
 ## 2026-08-05 — 2026-07 keyword snapshots imported
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

@@ -1,10 +1,10 @@
 # Channel: Amazon
 
-**Last verified:** 2026-07-14 · Links: [products.json](../../data/products.json) · [claims](../compliance/claims.md) · [listing copy](../../copy/amazon-listings/)
+**Last verified:** 2026-08-11 · Links: [products.json](../../data/products.json) · [claims](../compliance/claims.md) · [listing copy](../../copy/amazon-listings/) · [Attribution structure](amazon-attribution.md)
 
 ## Structure
 
-Amazon-first brand, US marketplace only, FBA fulfillment + AWD warehousing. Canadian marketplace expansion coming shortly (see [compliance](../compliance/claims.md) for CA requirements before launch). The Webflow site exists partly to push off-site traffic back to Amazon listings — Amazon's algorithm rewards listings that drive external traffic.
+Amazon-first brand, US marketplace only, FBA fulfillment + AWD warehousing. Canadian marketplace expansion coming shortly (see [compliance](../compliance/claims.md) for CA requirements before launch). The Webflow site exists partly to push off-site traffic back to Amazon listings — Amazon's algorithm rewards listings that drive external traffic, and [Amazon Attribution](amazon-attribution.md) is what actually measures whether that traffic converts.
 
 ## Listing conventions (from live copy)
 

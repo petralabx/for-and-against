@@ -1,6 +1,6 @@
 # Competitive landscape
 
-**Last verified:** 2026-07-14 · Links: [dupe map](dupe-map.md) · [voice](../brand/voice.md) · [claims policy](../compliance/claims.md)
+**Last verified:** 2026-08-05 · Links: [dupe map](dupe-map.md) · [voice](../brand/voice.md) · [claims policy](../compliance/claims.md)
 
 For & Against is positioned explicitly as the accessible-luxury alternative to this set — the competitor landscape *is* the positioning, so these pages are load-bearing for creator briefs, ads, and pricing strategy.
 
@@ -10,6 +10,7 @@ For & Against is positioned explicitly as the accessible-luxury alternative to t
 | Ouai | Haircare (shampoo/conditioner), body | [ouai.md](ouai.md) |
 | Necessaire | Body wash, lotion, "The Body" line | [necessaire.md](necessaire.md) |
 | Bulk/gallon competitors | Gallon + case formats | TODO — extract from gallon keyword exports |
+| Mass-market/drugstore | Body wash — EWG/price positioning, retail context | [mass-market.md](mass-market.md) |
 
 **Rule that applies everywhere:** where dupe/comparison language may appear is channel-restricted — see [claims policy](../compliance/claims.md). Never in Amazon listing copy.
 

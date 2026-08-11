@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-11 — brand manifesto and mass-market competitor docs added
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `docs/manifesto-and-mass-market-competitors` branch)
+- **Done:** Added `docs/brand/manifesto.md` (founding "for X / against Y" philosophy, source: brand guideline decks) and `docs/competitors/mass-market.md` (EWG score vs. price landscape against drugstore brands — Nivea, Native, Method, etc.). Linked the new mass-market page from `docs/competitors/README.md`.
+- **Next:** Mass-market competitor prices are undated-source (from a 2025 brand deck) — re-verify against current retail before using in any pricing or positioning work. `docs/competitors/README.md`'s "Bulk/gallon competitors" row is still an open TODO.
+- **Watch:** EWG score claims in `mass-market.md` are competitive research only, not approved marketing copy — compliance review required before any Amazon-facing use, per `docs/compliance/claims.md`. A&S discontinuation status was deliberately left out of this PR since it's still under discussion.
+
 ## 2026-08-05 — 2026-07 keyword snapshots imported
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

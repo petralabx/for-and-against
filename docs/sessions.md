@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-11 — Google Ads Phase 1/2 strategy written into paid-ads.md
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `docs/google-ads-phase1-strategy` branch)
+- **Done:** Filled in `docs/channels/paid-ads.md`'s open TODO — Phase 1 campaign structure (Competitor Conquesting: Salt & Stone/Ouai/Necessaire; Scent & Category: H&B/S&V/Category-Body Wash), budget tiers ($50/day launch, $100/day scale), Amazon Attribution tracking architecture for Google-driven traffic (separate `For & Against — Google Ads` campaign, per-theme ad groups for keyword-level routing), and the weekly reconciliation workflow.
+- **Next:** Category — Shampoo and Category — Lotion ad groups are documented but intentionally held for Phase 2 until Campaign 1–2 prove payback. No deodorant keyword data exists yet in `data/keywords/` — needs a direct Google Keyword Planner pull since H&B/S&V deodorant are best sellers but have no seed file. `docs/channels/amazon-attribution.md` doesn't exist yet — this doc references it as a TODO link.
+- **Watch:** All keyword volumes in this doc are Amazon-side (Jungle Scout), explicitly flagged as prioritization signals only — re-run every shortlist through Google Keyword Planner before actually launching, since Google and Amazon search behavior diverge (e.g. scent-plus-product terms are much thinner on Google). Amber & Sandalwood is excluded from all campaign planning per the discontinuation decision.
+
 ## 2026-08-05 — 2026-07 keyword snapshots imported
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

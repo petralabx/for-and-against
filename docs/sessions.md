@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-11 — visual asset manifest and A+ Content template added
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `site/assets-manifest-and-aplus-content-template` branch)
+- **Done:** Added `site/assets-manifest.md` — an index of known image assets (filename → scent/product/type → likely purpose → Webflow URL) rather than committing the image binaries themselves. Added `docs/channels/amazon-a-plus-content.md` — the 7-module A+ Content template (specs, copy patterns, known gaps) generalized from the Santal & Vetiver body wash build so it can be reused for Hinoki & Bergamot. Cross-linked both from `site/README.md`.
+- **Next:** Webflow Asset URL column in the manifest is entirely TODO — no Webflow connector was active this session. Several filenames need identification before reuse (`3.png`, `8.png`, `13.png`, `ChatGPT_Image_...png`, and the `FNA*2LP`/`FNA*` numeric-coded renders whose SKU prefixes don't match the documented `FNA305`/`FNA306`/`FNA300` pattern — cross-reference against `For_Against_Product_Information.xlsx` before using). A repeated "shapoo" typo across several shampoo asset filenames should be fixed at the source if those get renamed.
+- **Watch:** No image binaries were committed to the repo, intentionally — this manifest is an index only, per the reasoning in `site/assets-manifest.md`. Don't let a future session start committing raw images here.
+
 ## 2026-08-11 — Amazon Attribution structure documented
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

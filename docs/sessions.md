@@ -43,6 +43,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 - **Next:** `docs/channels/paid-ads.md` (PR #13, not yet merged) has a placeholder reference to this doc that should be swapped for a real link once both PRs land — whichever merges second should update the link. A tag-name → tracking-URL → Google Ads-keyword mapping doc is still unbuilt; recommended once the Google Ads ad group count grows.
 - **Watch:** This branch was cut from `main` before PR #13 merged, so it doesn't carry that PR's `paid-ads.md` changes — no conflict expected since different files were touched, but worth double-checking on merge.
 
+## 2026-08-11 — brand manifesto and mass-market competitor docs added
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `docs/manifesto-and-mass-market-competitors` branch)
+- **Done:** Added `docs/brand/manifesto.md` (founding "for X / against Y" philosophy, source: brand guideline decks) and `docs/competitors/mass-market.md` (EWG score vs. price landscape against drugstore brands — Nivea, Native, Method, etc.). Linked the new mass-market page from `docs/competitors/README.md`.
+- **Next:** Mass-market competitor prices are undated-source (from a 2025 brand deck) — re-verify against current retail before using in any pricing or positioning work. `docs/competitors/README.md`'s "Bulk/gallon competitors" row is still an open TODO.
+- **Watch:** EWG score claims in `mass-market.md` are competitive research only, not approved marketing copy — compliance review required before any Amazon-facing use, per `docs/compliance/claims.md`. A&S discontinuation status was deliberately left out of this PR since it's still under discussion.
+
 ## 2026-08-05 — 2026-07 keyword snapshots imported
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

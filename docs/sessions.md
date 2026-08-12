@@ -27,6 +27,22 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-11 — visual asset manifest and A+ Content template added
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)
+- **PR:** n/a (see `site/assets-manifest-and-aplus-content-template` branch)
+- **Done:** Added `site/assets-manifest.md` — an index of known image assets (filename → scent/product/type → likely purpose → Webflow URL) rather than committing the image binaries themselves. Added `docs/channels/amazon-a-plus-content.md` — the 7-module A+ Content template (specs, copy patterns, known gaps) generalized from the Santal & Vetiver body wash build so it can be reused for Hinoki & Bergamot. Cross-linked both from `site/README.md`. **Follow-up same session:** connected the Webflow MCP connector and pulled the live Assets API (38 assets) to fill in real URLs — confirmed only 4 manifest entries actually exist on Webflow (the 3 category tiles + 1 hero image); every scent-specific packaging photo, 3D bottle render, and `FNA*2LP` render is confirmed **not** on Webflow, consistent with the site having no product detail pages. Also surfaced that duplicate-looking category tile assets exist from two upload batches (Jun 16 vs Jun 30) with no indication which is live, and that the homepage hero currently runs on AI-generated imagery.
+- **Next:** Several filenames still need identification (`3.png`, `8.png`, `13.png` — confirmed not on Webflow either, so likely knowledge-base-only exports) and the `FNA*2LP` SKU prefixes still don't match the documented `FNA305`/`FNA306`/`FNA300` pattern — cross-reference against `For_Against_Product_Information.xlsx` before using. A repeated "shapoo" typo across several shampoo asset filenames should be fixed at the source if those get renamed. Someone with Webflow Designer access should confirm which of the duplicate category tile generations is actually live on each page.
+- **Watch:** No image binaries were committed to the repo, intentionally — this manifest is an index only, per the reasoning in `site/assets-manifest.md`. Don't let a future session start committing raw images here.
+
+## 2026-08-11 — Amazon Attribution structure documented
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** n/a (see `docs/amazon-attribution-structure` branch)
+- **Done:** Added `docs/channels/amazon-attribution.md` — campaign/ad group/tag hierarchy, current ad group lists for both the `For & Against Website` and `For & Against — Google Ads` campaigns, naming convention, campaign-level product pool rule, URL handling rules, and platform quirks (no native delete, wizard closing after campaign creation, per-SKU eligibility gaps). Cross-linked from `docs/channels/amazon.md`.
+- **Next:** `docs/channels/paid-ads.md` (PR #13, not yet merged) has a placeholder reference to this doc that should be swapped for a real link once both PRs land — whichever merges second should update the link. A tag-name → tracking-URL → Google Ads-keyword mapping doc is still unbuilt; recommended once the Google Ads ad group count grows.
+- **Watch:** This branch was cut from `main` before PR #13 merged, so it doesn't carry that PR's `paid-ads.md` changes — no conflict expected since different files were touched, but worth double-checking on merge.
+
 ## 2026-08-11 — brand manifesto and mass-market competitor docs added
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector)

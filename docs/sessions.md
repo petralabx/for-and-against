@@ -30,7 +30,7 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 ## 2026-08-18 — SEO metadata + breadcrumbs for Webflow
 
 - **Who:** Stephen + Cursor
-- **PR:** pending (`seo/metadata-and-breadcrumbs`)
+- **PR:** [#16](https://github.com/petralabx/for-and-against/pull/16) (`seo/metadata-and-breadcrumbs`)
 - **Done:** Shipped unique titles/descriptions, Organization/WebPage JSON-LD, breadcrumbs, Scents template SEO (Designer-bound), image alts, one H1 per key page, and Shop By Scent → `/#find-your-scent`. Repo source of truth: [site/seo.md](../site/seo.md) (approved copy + remaining work), [site/cms-schema.md](../site/cms-schema.md), [site/custom-code/](../site/custom-code/). Live on apex + www as of 17:26 UTC.
 - **Next (pick up from [site/seo.md](../site/seo.md) Remaining work):** (1) Webflow default domain so www 301s to apex. (2) Amazon Attribution URLs on Shop/scent Buy buttons (`href="#"` today) — Stephen owns this; campaign `For & Against Website`. (3) Bind scent fragrance-story — Bergamot/Santal pages still show Amber copy. (4) Footer legal links still point at `for-against.webflow.io`. (5) Decide whether `/products/{slug}` should exist (404, not in sitemap). Search Console Domain property + apex sitemap already submitted.
 - **Watch:** Never paste head/footer without keeping GA4 `G-TSLV0FDSBD`. Do not check “Get URL from Scents” on the three static scent tabs. Amber & Sandalwood is still on-site but flagged for discontinuation. Comforting Body Lotion | Bergamot & Hinoki was published from draft so its alt could go live.

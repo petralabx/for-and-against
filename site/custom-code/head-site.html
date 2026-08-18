@@ -1,0 +1,70 @@
+<!--
+  Site-wide head custom code (Webflow Site Settings → Custom Code → Head).
+  Installed: 2026-08-18. Includes pre-existing scrollbar/scent-tab CSS, Tabler icons,
+  GA4 G-TSLV0FDSBD, plus breadcrumb styles.
+-->
+<style>
+.collection-scroll::-webkit-scrollbar {
+  display: none;
+}
+.collection-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: scroll;
+}
+  .scent-tab-link {
+  text-decoration: none !important;
+}
+
+.fa-breadcrumbs {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 12px 0 0;
+}
+.fa-breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 24px;
+  max-width: 1140px;
+}
+.fa-breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b6b6b;
+}
+.fa-breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  color: #b3b3b3;
+  font-weight: 400;
+}
+.fa-breadcrumbs a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+.fa-breadcrumbs a:hover,
+.fa-breadcrumbs a:focus-visible {
+  text-decoration: underline;
+}
+.fa-breadcrumbs [aria-current="page"] {
+  color: #6b6b6b;
+}
+</style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TSLV0FDSBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TSLV0FDSBD');
+</script>

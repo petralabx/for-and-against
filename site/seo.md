@@ -14,18 +14,41 @@ Approved titles, descriptions, Open Graph, JSON-LD, and breadcrumb labels for th
 - **Site job:** send qualified traffic to Amazon (Attribution-tagged links). Metadata can name Amazon; it should not read like a listing title dump.
 - **Redirects:** Webflow redirect panel is live; this file mirrors it. _(none recorded)_
 
-## Live audit (2026-08-18, before this pass)
+## Live status (2026-08-18, after publish 17:26 UTC)
 
-| Gap | Evidence |
+Shipped: unique titles + meta descriptions on static pages and `/scents/*`, Open Graph copy-from-SEO, Organization/WebPage JSON-LD, visible breadcrumbs + BreadcrumbList, image alts, heading hierarchy below, Shop By Scent → `/#find-your-scent`.
+
+Search Console: Domain property `forandagainstbodycare.com` + sitemap `https://forandagainstbodycare.com/sitemap.xml` already submitted. No further GSC setup needed this pass.
+
+| Still open | Evidence |
 |---|---|
-| No meta descriptions on any URL | Live `<head>` has no `name="description"` |
-| Duplicate titles | Home + all `/scents/*` render `<title>For & Against` |
-| Thin titles | `/shop`, `/best-sellers`, `/contact`, legal pages use the nav label only |
-| No JSON-LD | Zero `application/ld+json` on sampled pages |
-| No breadcrumbs | No visible trail; no `BreadcrumbList` |
-| Product CMS routes 404 | `/products/{slug}` 404s on custom domain and `for-against.webflow.io`; not in sitemap |
-| Sitemap is static + scents only | 10 URLs; no product items |
-| `site:forandagainstbodycare.com` | No indexed results sampled on 2026-08-18 (new site / thin metadata) |
+| www and apex both 200 | No 301. Set Webflow **Publishing → Default domain** to apex `forandagainstbodycare.com` |
+| Shop / scent “Buy on Amazon” is `href="#"` | Home/Best Sellers have some Attribution links; Shop and scent pages do not. Stephen owns pasting tags — campaign `For & Against Website` ([docs/channels/amazon-attribution.md](../docs/channels/amazon-attribution.md)) |
+| Scent fragrance story is static Amber copy | Bergamot page still says “Sandalwood is a creamy, woody fragrance…”. No CMS field — add one or bind existing copy |
+| Footer legal URLs | Point at `for-against.webflow.io`, not the custom domain. Footer About/Contact are `#` |
+| Product CMS routes 404 | `/products/{slug}` 404s; not in sitemap. SEO fields are filled for if PDPs go live |
+| Products template SEO unbound | Bind only if those URLs become public |
+| Rel canonical missing | Webflow page canonical not set; host duplicate until default-domain 301 exists |
+
+## Remaining work (next session)
+
+1. **Default domain** — Webflow Site settings → Publishing → set default to `forandagainstbodycare.com` so www 301s to apex. Matches sitemap + JSON-LD host.
+2. **Amazon Attribution** — replace `#` Buy buttons on Shop and each `/scents/{slug}` with placement-specific tags (not one sitewide tag). Do not invent tags here.
+3. **Fragrance story** — add a Scents CMS PlainText/RichText field and bind the story `<p class="paragraph-2">` on the Scents template. Copy from [docs/brand/scents/](../docs/brand/scents/). Live notes fields are already CMS-bound.
+4. **Footer** — point legal links at the custom domain; wire About/Contact.
+5. **PDP decision** — keep `/products/{slug}` unpublished, or publish the Products template and bind `seo-title` / `seo-description` the same way Scents was bound.
+6. **Canonical tags** — after the 301, set Webflow canonicals to apex if the designer still emits none.
+
+## Heading hierarchy (live)
+
+| Page | H1 | Notes |
+|---|---|---|
+| `/` | Personal Care That Works With Your Body | Best Sellers + Find Your Scent are H2. Find Your Scent heading has `id="find-your-scent"` |
+| `/shop` | Shop All Products | |
+| `/best-sellers` | Best Sellers | |
+| `/scents/{slug}` | Scent name (`Heading 12`) | Was H4. The Explore-Scent card title is not the page H1 |
+
+Scent tabs (`scent-tab-link`) are **hardcoded** to `/scents/amber-sandalwood`, `/scents/bergamot-hinoki`, `/scents/santal-vetiver`. Do **not** check “Get URL from Scents” on those three — that would make every tab point at the current CMS item.
 
 ## Static pages
 
@@ -47,7 +70,7 @@ Open Graph: copy title + description from SEO. Default `og:image` is the site lo
 
 ## CMS — Scents (`/scents/{slug}`)
 
-Template page ID: `6a307e6a67da424b1697059b`. Unique titles require the template SEO fields to be bound to CMS `seo-title` / `seo-description` in Webflow Designer (API cannot bind template SEO to a field). Values below are stored on each item.
+Template page ID: `6a307e6a67da424b1697059b`. **SEO title/description are bound in Designer** (2026-08-18) — live `<title>` is unique per scent (e.g. `Bergamot & Hinoki | For & Against`). Values below are stored on each item. API cannot bind template SEO; if titles regress, re-bind Page Settings → SEO → Add field.
 
 | Slug | Item ID | Title | Meta description |
 |---|---|---|---|
@@ -110,16 +133,12 @@ Implementation: site-wide custom code in [custom-code/](custom-code/) (CSS in he
 - Shop, Best Sellers: `CollectionPage` + `BreadcrumbList`
 - Contact: `ContactPage` + `BreadcrumbList`
 - Legal / returns: `WebPage` + `BreadcrumbList`
-- Scents (via footer script until template SEO is bound): `WebPage` + `BreadcrumbList`
+- Scents: `WebPage` + `BreadcrumbList` (page SEO bound; footer script still injects BreadcrumbList if the page HTML has none)
 
 Do not add `Product` schema until `/products/{slug}` returns 200 with price/availability that match Amazon. Do not add `SearchAction` — the site has no on-site search.
 
-## Designer follow-up (required for unique scent `<title>` tags)
+## Designer notes
 
-API page SEO on a collection template is a single fallback string. To emit unique titles in HTML:
+Scents template SEO bind is **done**. Products template: skip until PDPs are public.
 
-1. Collection Template (Scents) → Page Settings → SEO title → Add field → `SEO Title`
-2. Same for SEO description → `SEO Description`
-3. Repeat on the Products template if PDPs are turned on
-
-Until that bind, scent pages keep the site-name title even when CMS fields are populated.
+If unique scent titles disappear: Collection Template (Scents) → Page Settings → SEO title / description → Add field → `SEO Title` / `SEO Description`.

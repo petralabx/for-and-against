@@ -57,7 +57,8 @@ Template: `/products/{slug}` (page ID `6a309bc56469e785256f31a9`). **Item URLs 4
 
 - **Price Display is Plain Text**, not Number — this preserves the "$" symbol. Any generated CMS content must supply price as a string exactly matching `price_display` in `data/products.json` (e.g. `"$15.99"`). Never write a bare number.
 - Content generated for the CMS must map to these fields — never freeform web copy.
-- **SEO Title / SEO Description** must match [site/seo.md](seo.md). Binding those fields to the collection template `<title>` / meta description is a Designer step.
+- **SEO Title / SEO Description** must match [site/seo.md](seo.md). Scents template is bound in Designer (2026-08-18). Products template is **not** bound — do not bind it while `/products/{slug}` 404s.
+- **No fragrance-story field.** The Scents template story paragraph is static Amber & Sandalwood copy on every item. Add a CMS field before rewriting it. Notes (`top-notes` / `middle-notes` / `base-notes`) are already bound.
 
 ## Sync rule
 

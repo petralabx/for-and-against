@@ -2,6 +2,17 @@
 
 Append-only. Two sections: experiments (what we tested, what happened) and known issues (defects found in live surfaces). Agents: check the issue log before reusing any live copy.
 
+## Known issues — live Webflow site (found 2026-08-18)
+
+| # | Surface | Issue | Status |
+|---|---|---|---|
+| W1 | Hosting | `www` and apex both 200; two robots/sitemap hosts | OPEN — set default domain to apex |
+| W2 | Shop + `/scents/*` | Buy on Amazon buttons are `href="#"` | OPEN — Stephen pasting Attribution tags |
+| W3 | Scents template | Fragrance story paragraph is static Amber copy on every scent | OPEN — needs a CMS field |
+| W4 | Footer | Legal links use `for-against.webflow.io`; About/Contact are `#` | OPEN |
+| W5 | Products template | `/products/{slug}` 404s; not in sitemap | OPEN — decide if PDPs should exist |
+| W6 | HTML head | No `rel=canonical` | OPEN — after www 301 |
+
 ## Known issues — live Amazon listings (found 2026-07-14, from source spreadsheet audit)
 
 | # | SKU(s) | Issue | Status |

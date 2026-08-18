@@ -31,9 +31,9 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 - **Who:** Stephen + Cursor
 - **PR:** pending (`seo/metadata-and-breadcrumbs`)
-- **Done:** Live unique titles/descriptions, Organization/WebPage JSON-LD, visible breadcrumbs, Scents template SEO bound in Designer, image alts, one H1 per key page, and Shop By Scent retargeted to `/#find-your-scent`. Repo now versions `site/seo.md`, live CMS field inventory, and site-wide head/footer custom code.
-- **Next:** Set Webflow default domain so www 301s to apex. Paste Amazon Attribution URLs on Shop/scent Buy buttons. Bind scent fragrance-story (still static Amber copy). Decide whether `/products/{slug}` should exist — those URLs 404 and are missing from the sitemap.
-- **Watch:** Head/footer custom code was replaced as a whole block — keep GA4 `G-TSLV0FDSBD`. Product CMS items are not a live SERP surface until the template routes return 200. Amber & Sandalwood is still on-site but flagged for discontinuation.
+- **Done:** Shipped unique titles/descriptions, Organization/WebPage JSON-LD, breadcrumbs, Scents template SEO (Designer-bound), image alts, one H1 per key page, and Shop By Scent → `/#find-your-scent`. Repo source of truth: [site/seo.md](../site/seo.md) (approved copy + remaining work), [site/cms-schema.md](../site/cms-schema.md), [site/custom-code/](../site/custom-code/). Live on apex + www as of 17:26 UTC.
+- **Next (pick up from [site/seo.md](../site/seo.md) Remaining work):** (1) Webflow default domain so www 301s to apex. (2) Amazon Attribution URLs on Shop/scent Buy buttons (`href="#"` today) — Stephen owns this; campaign `For & Against Website`. (3) Bind scent fragrance-story — Bergamot/Santal pages still show Amber copy. (4) Footer legal links still point at `for-against.webflow.io`. (5) Decide whether `/products/{slug}` should exist (404, not in sitemap). Search Console Domain property + apex sitemap already submitted.
+- **Watch:** Never paste head/footer without keeping GA4 `G-TSLV0FDSBD`. Do not check “Get URL from Scents” on the three static scent tabs. Amber & Sandalwood is still on-site but flagged for discontinuation. Comforting Body Lotion | Bergamot & Hinoki was published from draft so its alt could go live.
 
 ## 2026-08-11 — visual asset manifest and A+ Content template added
 

@@ -27,14 +27,9 @@ Given that cost, we deliberately traded placement-level granularity for a far sm
 
 This means: Amazon Attribution reporting shows **clicks, detail page views, add-to-cart, purchases, and sales per product** (filtered to this campaign), but cannot tell you *which page* on the site generated a given click.
 
-### Ad groups status (20 live products in scope)
+### Ad groups status (18 products in scope)
 
-18 of 20 confirmed generated and tags applied to the corresponding Webflow CMS `amazon-url` field as of 2026-08-19. Still outstanding:
-
-- Conditioner Refill Pouch 2L – Bergamot & Hinoki (`B0GR6NXNJK`)
-- Conditioner Refill Pouch 2L – Santal & Vetiver (`B0GR6VHYFD`)
-
-These were on the manual checklist but did not appear in the tag export — needs a console check (may exist but wasn't exported, or was never created) before the campaign can be considered complete.
+**Conditioner is explicitly out of scope for this round** (decided 2026-08-19) — the 2 Conditioner Refill Pouch tags (Bergamot & Hinoki `B0GR6NXNJK`, Santal & Vetiver `B0GR6VHYFD`) that were on the original manual checklist are **not being created**, and no Conditioner CMS work is planned until a future, separate pass. Scope is now 18 live products, and all 18 are confirmed generated with tags applied to the corresponding Webflow CMS `amazon-url` field as of 2026-08-19. This campaign can be considered complete for the current scope.
 
 ### `For & Against — Google Ads` campaign (unaffected)
 
@@ -72,15 +67,14 @@ Attribution sets the trackable-product pool **at the campaign level**. All ad gr
 
 ## CMS coverage gap surfaced during 2026-08-19 setup
 
-Three products had generated Attribution tags but **no corresponding Webflow CMS item**: Shampoo Refill Pouch (Bergamot & Hinoki, Amber & Sandalwood) and Hand Soap (Bergamot & Hinoki). Draft CMS items were created for all three with their tag attached, but each still needs: price, product image, SEO title/description, and (for Hand Soap specifically) a new "Hand Soap" Category option added in Webflow Designer — the Category field's option list can't be edited via the Webflow MCP connector. None of the three are published yet.
+Three products had generated Attribution tags but **no corresponding Webflow CMS item**: Shampoo Refill Pouch (Bergamot & Hinoki, Amber & Sandalwood) and Hand Soap (Bergamot & Hinoki). Draft CMS items were created for all three with their tag attached; Greg is finishing these directly in Webflow (price, product image, SEO title/description, and adding a new "Hand Soap" Category option in Designer — the option list can't be edited via the Webflow MCP connector).
 
-Separately, the entire **Conditioner** product line (6 SKUs) has no Webflow CMS items at all — this predates the attribution work and is a larger gap to close separately.
+**Conditioner is out of scope for now** (see above) — no CMS work planned for that product line in this round.
 
 ## Open items / known issues
 
-- Verify the 2 missing Conditioner Refill Pouch tags (see above) and complete the campaign.
-- Finish and publish the 3 new draft CMS items (price, image, SEO copy, Hand Soap category).
-- Build out Conditioner CMS items (blocked on the same Category-option limitation for any Conditioner-specific categorization needs — check before starting).
+- 3 new draft CMS items (Shampoo Refill Pouch × 2, Hand Soap × 1) are being finished and published directly in Webflow by Greg — price, image, SEO copy, and the Hand Soap Category option.
+- Conditioner (Refill Pouches and the base product line) is intentionally out of scope for this round — revisit as a separate, future pass rather than treating it as an open gap.
 - 10 products remain not-live on Amazon at all (2 with no ASIN yet: Body Lotion 500ml Santal & Vetiver, Body Lotion Refill 2L Amber & Sandalwood); these need tags + CMS entries once launched, following the same product-level pattern above.
 - A past audit (pre-2026-08-19) found the homepage "Best Sellers" tagging didn't match the actual bestseller list under the old (now-superseded) page-level plan — logged in [docs/learnings.md](../learnings.md). Not applicable to the new structure, but worth confirming the bestseller list itself is still accurate.
 - A tag-name → tracking-URL → Google Ads-keyword mapping doc is still recommended for the Google Ads side once its ad group count grows past what's easy to track from memory — not yet built.

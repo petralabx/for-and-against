@@ -28,6 +28,20 @@ Discovered while attempting to build an interactive category filter on the Shop 
 | W8 | Homepage — Nav Bar | "Buy On Amazon" button linked internally to `/shop` instead of the Amazon storefront | FIXED 2026-08-20 — now points to the tagged storefront URL, opens in new tab, applies site-wide since it's a component default |
 | W9 | Homepage — Shop By Category | All 4 category tiles (Body Wash, Body Lotion, Deodorant, Refill Pouches) had no link at all | FIXED 2026-08-20 — each tile now wraps its image in a dedicated link routing to its matching new category page (`/shop-body-wash`, `/shop-body-lotion`, `/shop-deodorant`); the Refill Pouches tile routes to `/shop` (unfiltered) since refills merge into their base category rather than having their own category — see the 2026-08-19 session's Conditioner/refill scoping decision. |
 
+## Known issues — homepage Best Sellers carousel (found + fixed 2026-08-20)
+
+Greg reported three distinct symptoms; only two were real bugs.
+
+| # | Symptom | Root cause | Status |
+|---|---|---|---|
+| C1 | Scroll arrows invisible in Webflow Preview mode, but show fine on the published site | Expected Webflow behavior — the arrow icons come from an externally-loaded icon font (Tabler Icons via CDN in site head code); external font/CDN resources commonly don't render inside Designer's Preview sandbox even though they work normally in a real published page | NOT A BUG — no action taken |
+| C2 | Desktop: scrolling right worked fine, but could never scroll all the way left — the leftmost product always stayed cut off, no matter how much you clicked/scrolled left | Two compounding causes: (a) the `.collection-scroll` flex container had `justify-content: center`, which is a well-known CSS trap — centering an overflowing flex container's content shifts the computed scroll-start point, making the true leftmost content unreachable via scrolling even though the right side scrolls normally; (b) separately, the scroll-left arrow button is an opaque, absolutely-positioned overlay sitting directly on top of the card content rather than beside it, so even at the correct scroll-left position the first ~40px of the leftmost card was hidden underneath the arrow | FIXED — (a) `justify-content` changed from `center` to `flex-start` on the `collection-scroll` combo class; (b) added 48px left/right padding to `Collection List 3` so card content clears the arrow overlay zone on both edges |
+| C3 | Mobile: touch-scrolling didn't work on the carousel at all | The `collection-scroll` combo class had a `tiny` breakpoint override setting `overflow: visible`, which completely replaces the base class's `overflow: scroll` at mobile widths — disabling scroll entirely on phones | FIXED — removed the `tiny`-breakpoint `overflow` override so mobile inherits the base scrollable behavior |
+
+**Confirmed working by Greg live on the published site** after both fixes (C2 fully resolved only after the `justify-content` fix — the padding fix alone did not resolve it, since the root cause was the flexbox centering trap, not just the visual overlap).
+
+**Worth watching:** the `justify-content: center` + `overflow: scroll` combination (C2a) is an easy, non-obvious trap for any future horizontally-scrolling component on this site — check for it specifically if another carousel/scroller is ever added or reported as "can't scroll to the start."
+
 ## Known issues — live Amazon listings (found 2026-07-14, from source spreadsheet audit)
 
 | # | SKU(s) | Issue | Status |

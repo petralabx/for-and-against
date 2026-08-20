@@ -4,6 +4,7 @@ forandagainstbodycare.com is built in Webflow. **Visual design source of truth s
 
 | File/dir | Purpose |
 |---|---|
+| `page-structure.md` | Full page inventory — nav pages, and the not-in-nav category filter pages with their manual-setup status |
 | `cms-schema.md` | Collection/field documentation — what agent-generated CMS content must conform to |
 | `assets-manifest.md` | Index of image assets (SKU/scent → filename → Webflow URL → purpose) — images live in Webflow + the Claude project knowledge base, not in git |
 | `custom-code/` | Head/footer snippets, pixels, embeds — Webflow has no undo for these |

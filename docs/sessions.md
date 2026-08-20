@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-20 — Homepage link fixes, storefront Attribution tag, category filter attempted + paused
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)
+- **PR:** n/a (see `site/homepage-links-and-storefront-tag` branch)
+- **Done:** (1) Nav bar "Buy On Amazon" button was linking internally to `/shop` — now points to a newly-tagged Amazon storefront URL (new Attribution ad group `Storefront - Nav Bar`, 19th tag overall, same Publisher: Webflow / Channel: Display pattern), applies site-wide since it's a component default. (2) Homepage "Find Your Scent" section — the "Explore Scent →" button was a dead `href="#"`; rebound as a dynamic Collection Page link so each tile routes to its own scent page, and the tile image was moved inside that same link so it's clickable too (was previously not clickable at all — Webflow Image elements can't hold their own href). (3) Attempted an interactive category filter on Shop All (homepage category tiles → filtered product grid) — built a hidden per-card category marker bound to the CMS Category field and filter tab UI, but hit three stacked platform walls: custom code returns HTTP 406 (likely plan-tier restricted), Collection List query filtering isn't exposed via the Data API, and conditional visibility only binds to literal boolean fields (not Option-field equality). Paused at Greg's direction rather than attempting a from-scratch native rebuild without visual verification. The inert filter tab UI was set to hidden (not deleted) so it's resumable without rebuilding.
+- **Next:** (1) Greg to visually check the Find Your Scent section in Designer before publishing — the image-into-link move hasn't been visually verified since no Designer session was connected this session. (2) Category filter: either confirm/upgrade the Webflow plan to unlock custom code (simplest path — reactivates the JS approach already built), or have a human duplicate the product grid per category in Designer using the native Filter panel (not available via this API) and hand the resulting section IDs back for the CSS/anchor-link wiring. (3) `docs/learnings.md` W2 (Shop + `/scents/*` Buy on Amazon buttons still `href="#"`) is still open and unrelated to what was fixed today — still Stephen's to finish.
+- **Watch:** The hidden `.category-tag-marker` divs and `.fa-category-tabs` block are live on the Shop All page in a hidden/inert state — don't delete them thinking they're stray cruft, they're scaffolding for finishing the filter later. `docs/channels/amazon-attribution.md` and `docs/learnings.md` both updated this session; check both before touching Attribution tags or Webflow Designer API limits again.
+
 ## 2026-08-19 — Amazon Attribution product-level setup + CMS gap discovery
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)

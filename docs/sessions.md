@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-20 — Sitewide font audit + product button consistency
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)
+- **PR:** n/a (see `site/font-and-button-consistency` branch — cut from `main` before PR #18 merged, see Watch)
+- **Done:** (1) Font audit against `docs/brand/voice.md`'s typography spec (Headlines: Fortika, Sub-headlines: Inter Bold, Body: Inter Regular) covering every page with unique content. Found the base `<body>` tag defaulted to Arial (root cause of most drift), plus a homepage H1 in the wrong font, a homepage H2 with a literal split-font bug (half Fortika, half Arial in the same headline), two completely unstyled headings (Best Sellers page H1, Contact page H3), and all of Returns/Privacy/Terms' headings missing font entirely. All fixed — full list in `docs/learnings.md` (F1–F7). (2) Found 4 different "Buy on Amazon" button styles across the site with no shared design (homepage Best Sellers, Shop All/category pages, Scents page CTA, dedicated Best Sellers page). Unified all four around the pattern Greg approved: outline by default, black-fill + near-white text on hover with a smooth transition, and the orange/italic/bold "amazon" word treatment applied consistently everywhere. Fixed 2 more Arial overrides found on the dedicated Best Sellers page's button text while in there.
+- **Next:** Visual confirmation in Designer/Preview is still outstanding — this session's Designer connection kept timing out (idle disconnects), so none of these changes have been visually verified yet, only confirmed correct via the Data API's own read-back. Also flagged but **not fixed** (color, not font): the legal pages' main heading (`Heading 10`) is styled `color: white`, likely invisible depending on background — see `docs/learnings.md` W10. Responsiveness check across device sizes is the next and reportedly final item before this round of site work wraps up.
+- **Watch:** **This branch was cut from `main` before PR #18 merged**, so `docs/learnings.md` and `docs/sessions.md` here don't include PR #18's unmerged additions (the Amazon storefront tag, category filter pages, W7–W9). Same situation as the 2026-08-11 Attribution-structure branch — no file conflicts expected since different sections were touched, but double-check both PRs' diffs land cleanly on merge, and merge PR #18 first if possible since it's the older, more foundational change.
+
 ## 2026-08-19 — Amazon Attribution product-level setup + CMS gap discovery
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)

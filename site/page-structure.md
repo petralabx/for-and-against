@@ -12,15 +12,15 @@ Added 2026-08-20 to give the homepage's "Shop By Category" tiles and Shop All's 
 
 | Page | Slug | Page ID | Category filter |
 |---|---|---|---|
-| Shop - Shampoo | `/shop-shampoo` | `6a87538f49d3351c38f31055` | ⬜ needs manual Filter set in Designer: Category = Shampoo |
-| Shop - Body Wash | `/shop-body-wash` | `6a87538f3a3149b2859ee694` | ⬜ needs manual Filter set in Designer: Category = Body Wash |
-| Shop - Body Lotion | `/shop-body-lotion` | `6a875390782b6b6e51e31030` | ⬜ needs manual Filter set in Designer: Category = Body Lotion |
-| Shop - Deodorant | `/shop-deodorant` | `6a875390770bfd4aa78dca1f` | ⬜ needs manual Filter set in Designer: Category = Aluminum Free Deodorant |
-| Shop - Hand Soap | `/shop-hand-soap` | `6a875390f43cdac981cef9f9` | ⬜ needs manual Filter set in Designer: Category = Hand Soap |
+| Shop - Shampoo | `/shop-shampoo` | `6a87538f49d3351c38f31055` | ✅ set manually by Greg in Designer: Category = Shampoo |
+| Shop - Body Wash | `/shop-body-wash` | `6a87538f3a3149b2859ee694` | ✅ set manually by Greg in Designer: Category = Body Wash |
+| Shop - Body Lotion | `/shop-body-lotion` | `6a875390782b6b6e51e31030` | ✅ set manually by Greg in Designer: Category = Body Lotion |
+| Shop - Deodorant | `/shop-deodorant` | `6a875390770bfd4aa78dca1f` | ✅ set manually by Greg in Designer: Category = Aluminum Free Deodorant |
+| Shop - Hand Soap | `/shop-hand-soap` | `6a875390f43cdac981cef9f9` | ✅ set manually by Greg in Designer: Category = Hand Soap |
+
+**Filter status is per Greg's confirmation, not independently API-verified** — Collection List filter settings aren't readable via this Data API any more than they're writable, so there's no automated way to double-check. Worth a quick visual pass on each page before considering this fully closed out.
 
 **Why these exist but aren't linked from nav:** intentional — these are filter destinations only, reachable from (a) the homepage's Shop By Category tiles, and (b) a small "Filter by category" link row added to Shop All and to each of these 5 pages themselves, not from primary site navigation.
-
-**The one manual step per page:** the Data API doesn't expose Collection List query filtering (see `docs/learnings.md` A2) — each page's product grid needs its native Filter set by hand in Designer: open the Collection List's settings panel → Filter → Category equals [the page's category]. Until that's set, every one of these pages currently shows the same unfiltered grid as Shop All.
 
 **Refill Pouches has no dedicated page** — refill SKUs are categorized under their base product's Category (Body Wash Refill → Body Wash category, etc., per the 2026-08-19 session's decision), so the homepage's Refill Pouches tile links to Shop All unfiltered rather than a category that doesn't exist.
 

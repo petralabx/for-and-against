@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-08-20 — Homepage Best Sellers carousel scroll bugs fixed
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)
+- **PR:** n/a (see `site/bestsellers-carousel-scroll-fix` branch — cut from `main` before PRs #18 and #19 merged, see Watch)
+- **Done:** Diagnosed and fixed the homepage Best Sellers carousel, which Greg had been unable to figure out on his own. Three reported symptoms, two real bugs: (1) scroll arrows invisible in Webflow Preview but fine on the published site — confirmed as expected Webflow behavior with externally-loaded icon fonts, not a bug, no action taken. (2) Desktop could scroll right but never all the way left, leftmost product always cut off — root cause was `justify-content: center` on the scrolling flex container, a well-known CSS trap where centering an overflowing flex container makes its true start unreachable by scrolling; fixed by changing to `flex-start`. Also added 48px padding to both sides of the list, since the arrow buttons are opaque absolutely-positioned overlays sitting on top of card content rather than beside it. (3) Mobile scroll didn't work at all — found a `tiny`-breakpoint override setting `overflow: visible` on the scroll container, completely replacing the base `overflow: scroll`; removed it. All three fixes confirmed working live by Greg after publishing (mobile fixed immediately; desktop needed the `justify-content` fix specifically, the padding alone wasn't sufficient).
+- **Next:** Responsiveness check across device sizes for the rest of the site is still the next and reportedly final item for this round of site work. Worth checking any other horizontally-scrolling component on the site for the same `justify-content: center` + `overflow: scroll` trap.
+- **Watch:** **This branch was cut from `main` before PR #18 (homepage links/category pages) and PR #19 (font audit/button consistency) merged**, so `docs/learnings.md` and `docs/sessions.md` here don't include either PR's unmerged content. No file conflicts expected (different sections/entries), but merge #18 and #19 first since they're older and more foundational — check all three diffs land cleanly.
+
 ## 2026-08-19 — Amazon Attribution product-level setup + CMS gap discovery
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector)

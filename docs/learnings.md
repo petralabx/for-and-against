@@ -2,6 +2,18 @@
 
 Append-only. Two sections: experiments (what we tested, what happened) and known issues (defects found in live surfaces). Agents: check the issue log before reusing any live copy.
 
+## Known issues — Webflow Designer API constraints (found 2026-08-20)
+
+Discovered while attempting to build an interactive category filter on the Shop All page. All three blocked a no-code/low-code single-page tab approach; noting them so a future session doesn't rediscover the same walls.
+
+| # | Constraint | Detail | Status |
+|---|---|---|---|
+| A1 | Custom code (page freeform head/footer) | Writing any `<script>` via the Data API returns HTTP 406, even a one-line test script. Likely the site's Webflow plan doesn't include custom code (typically a CMS/Business-tier feature). CSS applied via Designer-native styling still works fine — only script injection is blocked. | OPEN — confirm plan tier with Webflow support or upgrade |
+| A2 | Collection List query filtering | The native "Filter" panel (show only items where Category = X) is not exposed as a settable field via the Data API's `data_element_settings_tool`. Only settable manually in Designer's visual UI. | OPEN — no API workaround found; worked around, see below |
+| A3 | Conditional visibility by Option-field equality | Element `visibility` can only bind to literal boolean CMS fields (e.g. Featured, Prime Eligible) via the API. Binding visibility to a computed condition like "Category equals Body Wash" (an Option field) is not exposed, even though Designer's own Conditional Visibility panel supports it natively. | OPEN — no API workaround found |
+
+**Workaround shipped 2026-08-20:** rather than one page with a JS/conditional-visibility toggle, built 5 separate category pages (`create_page` with `duplicateOf` — this API action duplicates a page's full structure, nav bar, footer and all) each meant to hold a native Collection List Filter set manually in Designer. This sidesteps A1–A3 entirely since no custom code or API-level filtering is required — only a human click-through in Designer's Filter panel per page. See `docs/sessions.md` 2026-08-20 entries for both the original attempt and this resolution.
+
 ## Known issues — live Webflow site (found 2026-08-18)
 
 | # | Surface | Issue | Status |
@@ -12,6 +24,9 @@ Append-only. Two sections: experiments (what we tested, what happened) and known
 | W4 | Footer | Legal links use `for-against.webflow.io`; About/Contact are `#` | OPEN |
 | W5 | Products template | `/products/{slug}` 404s; not in sitemap | OPEN — decide if PDPs should exist |
 | W6 | HTML head | No `rel=canonical` | OPEN — after www 301 |
+| W7 | Homepage — Find Your Scent | "Explore Scent →" button was `href="#"` and the tile image had no link at all | FIXED 2026-08-20 — button and a new dedicated tile-image link both bound to the Scents collection's `amazon-url` field (misleadingly named — its help text confirms it was always meant to hold this internal link, not an Amazon URL), now populated with the correct `forandagainstbodycare.com/scents/{slug}` link per scent. An earlier fix in this same session used a `collectionPage` link guess instead of this field — corrected once the intended field was discovered. |
+| W8 | Homepage — Nav Bar | "Buy On Amazon" button linked internally to `/shop` instead of the Amazon storefront | FIXED 2026-08-20 — now points to the tagged storefront URL, opens in new tab, applies site-wide since it's a component default |
+| W9 | Homepage — Shop By Category | All 4 category tiles (Body Wash, Body Lotion, Deodorant, Refill Pouches) had no link at all | FIXED 2026-08-20 — each tile now wraps its image in a dedicated link routing to its matching new category page (`/shop-body-wash`, `/shop-body-lotion`, `/shop-deodorant`); the Refill Pouches tile routes to `/shop` (unfiltered) since refills merge into their base category rather than having their own category — see the 2026-08-19 session's Conditioner/refill scoping decision. |
 
 ## Known issues — homepage Best Sellers carousel (found + fixed 2026-08-20)
 

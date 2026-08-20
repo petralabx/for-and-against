@@ -1,7 +1,7 @@
 
 # Channel: Amazon Attribution (tracking layer)
 
-**Last verified:** 2026-08-19 · Links: [Amazon listings](amazon.md) · [paid ads](paid-ads.md) · [learnings](../learnings.md)
+**Last verified:** 2026-08-20 · Links: [Amazon listings](amazon.md) · [paid ads](paid-ads.md) · [learnings](../learnings.md)
 
 Amazon Attribution is the measurement layer underneath every off-Amazon traffic source (Webflow site, Google Ads, eventually creators/TikTok Shop). It exists because neither Google Ads' own conversion tag nor generic web analytics can see a purchase that completes on amazon.com — Amazon stopped supporting GCLID capture in 2022, and Google's conversion pixel can't fire on amazon.com at all. GA4 covers pre-click behavior only (page views, scroll, outbound clicks); Attribution is what closes the loop on the actual sale.
 
@@ -18,7 +18,7 @@ Given that cost, we deliberately traded placement-level granularity for a far sm
 
 ## Current structure (product-level)
 
-**Campaign → ad group → tag**, but ad groups now map 1:1 to **products**, not placements:
+**Campaign → ad group → tag**, but ad groups now map 1:1 to **products** (or, for the storefront, a single browse destination), not placements:
 
 - **Campaign:** `For & Against - Website Placement Tracking`
 - **Publisher:** `Webflow`
@@ -27,9 +27,11 @@ Given that cost, we deliberately traded placement-level granularity for a far sm
 
 This means: Amazon Attribution reporting shows **clicks, detail page views, add-to-cart, purchases, and sales per product** (filtered to this campaign), but cannot tell you *which page* on the site generated a given click.
 
-### Ad groups status (18 products in scope)
+### Ad groups status (18 products + 1 storefront tag)
 
 **Conditioner is explicitly out of scope for this round** (decided 2026-08-19) — the 2 Conditioner Refill Pouch tags (Bergamot & Hinoki `B0GR6NXNJK`, Santal & Vetiver `B0GR6VHYFD`) that were on the original manual checklist are **not being created**, and no Conditioner CMS work is planned until a future, separate pass. Scope is now 18 live products, and all 18 are confirmed generated with tags applied to the corresponding Webflow CMS `amazon-url` field as of 2026-08-19. This campaign can be considered complete for the current scope.
+
+**Storefront tag added 2026-08-20:** a 19th ad group, `Storefront - Nav Bar`, was manually created (same Publisher: Webflow, Channel: Display pattern) with the click-through URL pointed at the Amazon storefront rather than a single product. Its tagged URL is applied to the "Buy On Amazon" nav bar button site-wide (a component default, so it updates every page that uses the nav bar, not just the homepage).
 
 ### `For & Against — Google Ads` campaign (unaffected)
 
@@ -44,7 +46,7 @@ The ad group's default Final URL (storefront tag) is the fallback for any keywor
 
 ## Naming convention
 
-- **Website campaign:** `[SKU] - [Product Name] - [Format] - [Scent]` per ad group.
+- **Website campaign:** `[SKU] - [Product Name] - [Format] - [Scent]` per ad group, or a descriptive name (e.g. `Storefront - Nav Bar`) for non-product destinations.
 - **Google Ads campaign:** `[Page/Theme] - [Placement] - [Product/Scent]`, unchanged from before.
 
 ## Product pool — campaign-level, not ad group-level
@@ -78,3 +80,4 @@ Three products had generated Attribution tags but **no corresponding Webflow CMS
 - 10 products remain not-live on Amazon at all (2 with no ASIN yet: Body Lotion 500ml Santal & Vetiver, Body Lotion Refill 2L Amber & Sandalwood); these need tags + CMS entries once launched, following the same product-level pattern above.
 - A past audit (pre-2026-08-19) found the homepage "Best Sellers" tagging didn't match the actual bestseller list under the old (now-superseded) page-level plan — logged in [docs/learnings.md](../learnings.md). Not applicable to the new structure, but worth confirming the bestseller list itself is still accurate.
 - A tag-name → tracking-URL → Google Ads-keyword mapping doc is still recommended for the Google Ads side once its ad group count grows past what's easy to track from memory — not yet built.
+- A homepage category-tab filter for Shop All was attempted 2026-08-20 and paused — see `docs/sessions.md` same-date entry and `docs/learnings.md` for the platform constraints found (no custom code, no filter/conditional-visibility API).

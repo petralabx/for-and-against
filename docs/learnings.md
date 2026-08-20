@@ -12,6 +12,42 @@ Append-only. Two sections: experiments (what we tested, what happened) and known
 | W4 | Footer | Legal links use `for-against.webflow.io`; About/Contact are `#` | OPEN |
 | W5 | Products template | `/products/{slug}` 404s; not in sitemap | OPEN — decide if PDPs should exist |
 | W6 | HTML head | No `rel=canonical` | OPEN — after www 301 |
+| W10 | Legal pages (Returns, Privacy, Terms) — `Heading 10` | Main page title styled with `color: white` — likely invisible depending on the page background | OPEN — flagged during 2026-08-20 font audit, not fixed since it's a color issue, not a font issue |
+
+## Known issues — site typography (found + fixed 2026-08-20, font audit)
+
+Per `docs/brand/voice.md`: Headlines → Fortika, Sub-headlines → Inter Bold, Body → Inter Regular. Audit covered every page with unique content (Home, Shop All, all 5 category pages, Scents template, Best Sellers page, Contact, Returns/Privacy/Terms).
+
+| # | Surface | Issue | Status |
+|---|---|---|---|
+| F1 | Site-wide | Base `<body>` tag defaulted to Arial, not Inter — root cause of most inconsistency below, since many text elements have no explicit font-family and fell through to this | FIXED — body tag font-family set to Inter |
+| F2 | Homepage H1 ("Personal Care That Works With Your Body") | Rendered in Inter, not Fortika (headline) | FIXED — `.heading` class and its inner `.italic-text` span both set to Fortika. **Note:** immediately after this fix, the Designer canvas rendered this specific heading's words with no spaces between them, despite the underlying text content being one normal string ("Personal Care That Works With Your Body") — confirmed not a font-wide issue since other Fortika headings render spacing correctly. Greg confirmed it looks correct in practice; logged as a likely Designer-canvas-only rendering quirk with the custom OTF file, not a real bug. |
+| F3 | Homepage H2 ("Signature Scents. Thoughtful Formulas.") | Split-font bug — first half wrapped in a Fortika span, second half was a bare string inheriting Arial from body, so one heading rendered in two fonts | FIXED — `.heading-2` class itself set to Fortika, so the bare text now matches |
+| F4 | Best Sellers page H1, Contact page H3 ("Contact Us") | No font styling applied at all (unstyled default elements) | FIXED — both given the existing `Heading 13` class (already Fortika) |
+| F5 | Returns/Privacy/Terms (shared template, same element IDs across all three) — `Heading 10` | Main page title had no font-family | FIXED — set to Fortika |
+| F6 | Returns/Privacy/Terms — `Heading 11` (6 recurring sub-section headers per page: "Returns," "Shipping," etc.) | No font-family or weight | FIXED — set to Inter, font-weight 700 (sub-headline spec) |
+| F7 | `Text Block 15`, base `Text Block` class, `Text Block 66`/`Text Block 67` (Best Sellers page button text) | Explicit `font-family: Arial` overrides that survived even after the body tag fix | FIXED — all set to Inter |
+
+**Already correct, no fix needed:** Find Your Scent heading, homepage Best Sellers section heading, Shop By Category heading, Scents template heading, and all Shop All/category page headings were already Fortika via their own class or an inner span.
+
+**Not checked:** `Heading 4`, `Heading 5`, `Heading 9` style classes exist but weren't found rendering on any page checked (Home, Shop All, 5 category pages, Scents template, Products template, Best Sellers, Contact, Returns/Privacy/Terms) or inside the Nav Bar/Footer components — likely orphaned styles from earlier iteration. Left untouched since fixing unused styles has no visible effect; worth a cleanup pass someday if confirmed genuinely unused.
+
+## Known issues — product button consistency (found + fixed 2026-08-20)
+
+Four different "Buy on Amazon" button styles existed across the site with no shared pattern:
+
+| Button class | Used on | Before | After |
+|---|---|---|---|
+| `Link Block 6` | Homepage Best Sellers section | Outline, black border, no hover; see B1 below for a deeper bug found here | Outline/hover-fill pattern matching the other three, plus B1 fixed |
+| `Link Block 7` | Shop All + all 5 category pages | Solid black background always, no hover, "amazon" word uncolored | Converted to outline/hover-fill pattern; "amazon" word now orange/bold/italic to match the homepage treatment |
+| `Link Block 14` | Scents template CTA | Outline with hover-fill already (the "transition" look Greg specifically liked) | Unchanged except an explicit `transition` property added for guaranteed smoothness |
+| `Link Block 16` | Dedicated Best Sellers page (`/best-sellers`) | Solid black background always, Arial font bug on both text spans | Converted to outline/hover-fill pattern; Arial → Inter |
+
+**Resulting shared pattern:** transparent background, 1px solid `#1a1a1a` border, dark text (`#1a1a1a`) by default, fills to `#1a1a1a` background with `#f5f2ec` text on hover, `background-color 0.2s ease, color 0.2s ease` transition. The orange/italic/bold "amazon" word treatment from the homepage button is now applied consistently on every button that includes it.
+
+**B1 — Hidden per-element hover bug on `Link Block 6` (found + fixed 2026-08-20, after Greg tested live):** the initial fix only added a hover state to the button (`Link Block 6`) itself, assuming its "Shop Now" child text would inherit the color change. In fact the child (`Text Block 31`) had its own hardcoded `color: black` at rest **and its own separate `:hover` pseudo** (`color: #f5f2ec`) completely disconnected from the parent button — so hovering the button darkened the background, but the text only turned white if the mouse was directly over the text glyphs themselves, not anywhere else on the button. Fixed by moving the color logic onto `Link Block 6` (base `color: #1a1a1a`, hover `color: #f5f2ec`) and stripping `Text Block 31`'s own color entirely so it inherits from the ancestor's hover state correctly — the same pattern already used successfully for `Text Block 45`/`Text Block 67` on the other two buttons. **Confirmed `Text Block 45` and `Text Block 67` do NOT have this same hidden hover pseudo** — checked directly, only `Link Block 6`'s child had it.
+
+**Implementation note:** child text spans that need to change color on the parent's hover (e.g. "Shop Now") must have **no explicit color of their own, in either the base or hover pseudo state** — any color rule on the child, even a hover-scoped one, will override or disconnect from the parent's own hover-driven inheritance. This is the root cause of B1 and worth checking for on any future button/card component with similar hover-fill patterns.
 
 ## Known issues — live Amazon listings (found 2026-07-14, from source spreadsheet audit)
 

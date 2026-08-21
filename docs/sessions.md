@@ -30,7 +30,7 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 ## 2026-08-21 — Re-pin compliance drift GEN_REPO to petralabx/PLX_MC
 
 - **Who:** Vince + Cursor Cloud Agent (TASK-1167 remaining consumer)
-- **PR:** pending (this branch)
+- **PR:** [#22](https://github.com/petralabx/for-and-against/pull/22) (`cursor/repin-compliance-drift-gen-repo-e272`)
 - **Done:** Re-scaffolded `--workflows-only` from `petralabx/PLX_MC@5db108c746fad912f4ab34997caa1c255f5b4d8c`. Drift `GEN_REPO` is now `petralabx/PLX_MC` (was `taylorvalton/PLX_MC`). Regenerated `plx-mc-compliance.yml` + copied compliance scripts. Did not flip `COMPLIANCE_MODE` (registry already soft). No product/marketing files.
 - **Next:** Review + merge this PR so the remaining TASK-1167 consumer is green. Do not merge from the agent.
 - **Watch:** Live `COMPLIANCE_MODE` stays soft. New drift job also pins `scripts/compliance-pr-verify.mjs`.

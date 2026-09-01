@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-09-01 — Remount PR #7 skills seed onto current main
+
+- **Who:** cos@petrasoap.com + Cursor Cloud Agent
+- **PR:** forthcoming remount vs main (branch `cip/skills-seed-from-pr-7`); does not rewrite #2 or #7
+- **Done:** Remounted PR #7 head `d0969b91` (39-skill plx-engineering-core pack from `petralabx/skills@3c67014`) onto a new branch from current `origin/main`. Every `#7` pack path including `.cursor/skills/README.md` is present. Five add/add conflicts (`README.md`, `capabilities-deck`, `create-skill`, `plx-graph-mail`, `project-hardener`) resolved by keeping current main (newer v1.6.3 via #9) so the remount does not downgrade the pack. No application code, no schema, no force-push.
+- **Next:** CIP closes #2 and #7 as superseded after this remount PR exists. Review + merge this remount; agent will not merge or close the old PRs.
+- **Watch:** Leftover TASK-442 consumer seed. Live heads of `chore/cursor-skills-plx-engineering-core` (#2) and `cursor/add-plx-engineering-core-skills-7ec4` (#7) must stay untouched.
+
 ## 2026-08-26 — Product grid root-caused and fixed: grid-template-areas conflict
 
 - **Who:** Greg + Claude (claude.ai, GitHub MCP connector, Webflow MCP connector, live Designer session)

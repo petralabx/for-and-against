@@ -1,14 +1,15 @@
 {
   "_meta": {
     "source": "For_Against_Product_Information.xlsx (Financials + Amazon Listing Information tabs; financial columns excluded)",
-    "last_verified": "2026-07-14",
+    "last_verified": "2026-08-19",
     "canonical": true,
     "notes": [
       "Canonical product record. Webflow CMS, Amazon listings, and all generated copy sync FROM this file.",
       "COGS, fees, and margin data intentionally excluded per brand guardrails \u2014 never add financial columns to this repo.",
       "SKU convention per Financials tab: FNAx0x = 4-gallon case, FNAx0x-G = single gallon. The SKU List tab labels FNAx0x as '1 Gal' \u2014 discrepancy pending verification.",
       "price_display is the plain-text string format required by the Webflow CMS 'Price Display' field.",
-      "asin: null means not yet listed (bulk SKUs) or ASIN missing from source sheet (e.g. FNA606-500, FNA600-2LP)."
+      "asin: null means not yet listed (bulk SKUs) or ASIN missing from source sheet (e.g. FNA606-500, FNA600-2LP).",
+      "2026-08-19: 12 retail_price_usd/price_display values corrected to match live Webflow/Amazon pricing after Greg's full reconciliation pass (Body Wash 500ml, Body Lotion 500ml, Deodorant B&H/S&V 75g, Shampoo Refill Pouches, Body Lotion Refill Pouches). This file had drifted from live pricing since the 2026-07-14 verification. Hand Soap B&H was checked and confirmed already correct at $15.99 (Webflow briefly showed $11.99 mid-session; corrected back). FNA600-2LP (Body Lotion Refill A&S, not yet live) updated to $23.99 to match its now-live sibling SKUs in the same product line \u2014 not independently confirmed, since it has no live listing yet; verify when it launches."
     ]
   },
   "products": [
@@ -84,8 +85,8 @@
       "scent": "Amber & Sandalwood",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 15.99,
-      "price_display": "$15.99",
+      "retail_price_usd": 17.99,
+      "price_display": "$17.99",
       "asin": "B0C82VV6ZB",
       "amazon_title": "For & Against Amber & Sandalwood Body Wash | No Nonsense Luxury Body Wash with Long Lasting Scent & Rich Lather | Clean Formula with Niacinamide & Hyaluronic Acid | Sulfate Free, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -95,8 +96,8 @@
       "scent": "Hinoki & Bergamot",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 15.99,
-      "price_display": "$15.99",
+      "retail_price_usd": 17.99,
+      "price_display": "$17.99",
       "asin": "B0GHT7R3ZJ",
       "amazon_title": "For & Against Bergamot & Hinoki Body Wash | No Nonsense Luxury Body Wash with Long Lasting Scent & Rich Lather | Clean Formula with Niacinamide & Hyaluronic Acid | Sulfate Free, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -106,8 +107,8 @@
       "scent": "Santal & Vetiver",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 15.99,
-      "price_display": "$15.99",
+      "retail_price_usd": 17.99,
+      "price_display": "$17.99",
       "asin": "B0GHT7YVVP",
       "amazon_title": "For & Against Santal & Vetiver Body Wash | No Nonsense Luxury Body Wash with Long Lasting Scent & Rich Lather | Clean Formula with Niacinamide & Hyaluronic Acid | Sulfate Free, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -150,8 +151,8 @@
       "scent": "Amber & Sandalwood",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 19.99,
-      "price_display": "$19.99",
+      "retail_price_usd": 15.99,
+      "price_display": "$15.99",
       "asin": "B0CBW2QJT5",
       "amazon_title": "For & Against Amber & Sandalwood Body Lotion | No Nonsense Luxury Body Lotion With Long Lasting Scent & Deep Hydrating | Fast Absorbing Moisturizing Lotion Formula For Smooth Skin | Clean, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -161,8 +162,8 @@
       "scent": "Hinoki & Bergamot",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 19.99,
-      "price_display": "$19.99",
+      "retail_price_usd": 15.99,
+      "price_display": "$15.99",
       "asin": "B0GQD9846M",
       "amazon_title": "For & Against Bergamot & Hinoki Body Lotion | No Nonsense Luxury Body Lotion With Long Lasting Scent & Deep Hydrating | Fast Absorbing Moisturizing Lotion Formula For Smooth Skin | Clean, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -172,8 +173,8 @@
       "scent": "Santal & Vetiver",
       "format": "500ml Retail Bottle",
       "segment": "retail",
-      "retail_price_usd": 19.99,
-      "price_display": "$19.99",
+      "retail_price_usd": 15.99,
+      "price_display": "$15.99",
       "asin": null,
       "amazon_title": "For & Against Santal & Vetiver Body Lotion | No Nonsense Luxury Body Lotion With Long Lasting Scent & Deep Hydrating | Fast Absorbing Moisturizing Lotion Formula For Smooth Skin | Clean, Vegan | 16.9 Fl Oz (500ml)"
     },
@@ -183,8 +184,8 @@
       "scent": "Amber & Sandalwood",
       "format": "2L Refill Pouch",
       "segment": "refill-pouch",
-      "retail_price_usd": 23.99,
-      "price_display": "$23.99",
+      "retail_price_usd": 21.99,
+      "price_display": "$21.99",
       "asin": "B0GJ12WMML",
       "amazon_title": "For & Against Amber & Sandalwood Shampoo Refill Pouch | No Nonsense Luxury Shampoo Refill with Long Lasting Scent | Strengthening Amino Acid Complex with Niacinamide & Panthenol | Value Size Refill | 67.6 Fl Oz (2L)"
     },
@@ -194,8 +195,8 @@
       "scent": "Hinoki & Bergamot",
       "format": "2L Refill Pouch",
       "segment": "refill-pouch",
-      "retail_price_usd": 22.99,
-      "price_display": "$22.99",
+      "retail_price_usd": 21.99,
+      "price_display": "$21.99",
       "asin": "B0GJ17R86F",
       "amazon_title": "For & Against Bergamot & Hinoki Shampoo Refill Pouch | No Nonsense Luxury Shampoo Refill with Long Lasting Scent | Strengthening Amino Acid Complex with Niacinamide & Panthenol | Value Size Refill | 67.6 Fl Oz (2L)"
     },
@@ -282,8 +283,8 @@
       "scent": "Amber & Sandalwood",
       "format": "2L Refill Pouch",
       "segment": "refill-pouch",
-      "retail_price_usd": 25.99,
-      "price_display": "$25.99",
+      "retail_price_usd": 23.99,
+      "price_display": "$23.99",
       "asin": null,
       "amazon_title": null
     },
@@ -293,8 +294,8 @@
       "scent": "Hinoki & Bergamot",
       "format": "2L Refill Pouch",
       "segment": "refill-pouch",
-      "retail_price_usd": 25.99,
-      "price_display": "$25.99",
+      "retail_price_usd": 23.99,
+      "price_display": "$23.99",
       "asin": "B0GR6W6L21",
       "amazon_title": "For & Against All Natural Body Lotion 2 Liter Refill Pouch | Hydrating Body Lotion For Dry Skin Made With Plant Based, Cruelty Free Ingredients | Premium Fragrances (Santal & Vetiv)"
     },
@@ -304,8 +305,8 @@
       "scent": "Santal & Vetiver",
       "format": "2L Refill Pouch",
       "segment": "refill-pouch",
-      "retail_price_usd": 25.99,
-      "price_display": "$25.99",
+      "retail_price_usd": 23.99,
+      "price_display": "$23.99",
       "asin": "B0GR6NYFQY",
       "amazon_title": "For & Against All Natural Body Lotion 2 Liter Refill Pouch | Hydrating Body Lotion For Dry Skin Made With Plant Based, Cruelty Free Ingredients | Premium Fragrances (Santal & Vetiv)"
     },
@@ -656,8 +657,8 @@
       "scent": "Hinoki & Bergamot",
       "format": "75g Stick",
       "segment": "retail",
-      "retail_price_usd": 11.99,
-      "price_display": "$11.99",
+      "retail_price_usd": 12.99,
+      "price_display": "$12.99",
       "asin": "B0FK6LXRWS",
       "amazon_title": "For & Against Aluminium-Free Deodorant | Unisex Fragranced Deodorants with Long-Lasting Odor Protection | Vegan, Non-Toxic, Cruelty-Free - 2.6oz (75g) (Hinoki & Bergamot)"
     },
@@ -667,8 +668,8 @@
       "scent": "Santal & Vetiver",
       "format": "75g Stick",
       "segment": "retail",
-      "retail_price_usd": 11.99,
-      "price_display": "$11.99",
+      "retail_price_usd": 12.99,
+      "price_display": "$12.99",
       "asin": "B0FFD1NHW2",
       "amazon_title": "For & Against Aluminium-Free Deodorant | Unisex Fragranced Deodorants with Long-Lasting Odor Protection | Vegan, Non-Toxic, Cruelty-Free - 2.6oz (75g) (Hinoki & Bergamot)"
     },

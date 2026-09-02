@@ -16,6 +16,40 @@ Greg reported the Amber & Sandalwood and Santal & Vetiver scent pages looking wr
 
 **Lesson worth remembering:** never use `grid-template-areas` on a Webflow CMS Collection List. It can silently half-work (looks fine at a glance, especially with a small/particular item count) and then fail in ways that look like totally unrelated bugs — sizing, spacing, alignment — because the actual failure mode (items overlapping/misplaced) is easy to misread as something else, especially before checking under multiple column-count or breakpoint conditions. If a Collection List's grid ever behaves strangely in a way that doesn't match a straightforward CSS explanation, check for a leftover `grid-template-areas` first.
 
+## Known issues — responsiveness (found + fixed 2026-08-20)
+
+This project's Webflow breakpoints: Desktop (base, unbounded), Tablet (≤991px), Mobile L (≤767px), Mobile (≤479px) — no separate "laptop" breakpoint exists, so laptop-width screens render using the same base/Desktop styles as a large monitor.
+
+### Shop All header image
+
+| # | Issue | Fix | Status |
+|---|---|---|---|
+| R1 | Header image (`Section 12`, background-image) cropped badly on mobile — confirmed by Greg | First attempt: `tiny`-breakpoint `background-position` override to `50% 20%`. **Revised after Greg's screenshot evidence** — the source image is a wide banner combining a face close-up (left) with the "For & Against" wordmark (right); the original vertical-only adjustment still centered the crop on the eye. Changed to `75% 30%` (shifted horizontally toward the wordmark, not just vertically) | AWAITING Greg's next live confirmation |
+| R7b | Scents template's own header (`Section 19`) — same source image | Same `75% 30%` mobile adjustment applied for consistency, on top of the earlier base `background-position: 50% 50%` fix (R7 below) | AWAITING confirmation |
+
+### Shop By Scent template — comprehensive responsive pass
+
+The entire template had **zero breakpoint overrides** on any of its core layout classes (`pdp-layout`, `pdp-left`, `pdp-right`, `products-grid`, `image-panel`, `scent-tabs`) before this session — a fixed desktop-only 35%/58% side-by-side layout at every screen size.
+
+| # | Class | Issue | Fix |
+|---|---|---|---|
+| R2 | `pdp-layout` | No max-width; stretches awkwardly on large monitors, and the same base styles apply at both laptop and huge-monitor widths since there's no dedicated breakpoint between them | Added `max-width: 1200px` + auto margins to the base (Desktop) style |
+| R3 | `pdp-layout`, `pdp-left`, `pdp-right` | Fixed `flex-direction: row` with 35%/58% widths and zero breakpoint overrides — would render as a cramped, illegibly narrow two-column layout on tablet and mobile | Tablet (`medium`): layout stacks to `flex-direction: column`, both columns to `width: 100%`, gap reduced to 32px. Mobile (`tiny`): padding tightened further to 16px, gap to 20px |
+| R4 | `image-panel` | No explicit height — relied entirely on implicit row-layout height-matching from its sibling, which breaks once the layout stacks vertically | Added explicit height per breakpoint: 400px (tablet), 280px (mobile L and below) |
+| R5 | `scent-tabs` | 40px gap between the three scent tab links, no wrapping — three scent names ("Amber & Sandalwood," etc.) likely overflow or crowd at narrower widths | Tablet: gap reduced to 20px, wrapping enabled, 16px side padding. Mobile: gap reduced further to 12px |
+| R6 | `products-grid` — **real bug affecting every screen size, not just mobile** | `grid-template-columns: 1fr 1fr` was already defined on this class, but `display: flex` + `flex-wrap: nowrap` meant that grid definition was completely dormant — every product card was being squeezed into one non-wrapping flex row regardless of how many existed, at any screen size | Changed `display` from `flex` to `grid`, activating the pre-existing 2-column definition. Added a `small`-breakpoint override to drop to a single column on Mobile L and below |
+| R6b | `products-grid` — **second bug found after R6, on scents with more than 4 products** | `grid-template-rows: auto auto` explicitly defined exactly **2 rows** — clearly built assuming exactly 4 products per scent (2×2). Santal & Vetiver has 6, and the overflow items rendered in visibly narrower, malformed cells (severe one-word-per-line text wrapping, a stray blue-colored `|` character) rather than wrapping into a clean 3rd row of 2 | Changed `grid-template-rows` from `auto auto` to plain `auto`, so any number of items wraps cleanly regardless of count. **Confirmed by Greg this did NOT fully resolve the issue** — see Open below |
+| R7 | `Section 19` (this page's own header image) | Used the exact same source image as Shop All's header (`Section 12`) but with a very different, more extreme crop (`background-position: 0px 0px`, anchored top-left) — inconsistent with the rest of the site and likely also cropped badly | Changed base `background-position` to `50% 50%` to match Shop All's treatment; see R7b above for the subsequent mobile-specific revision |
+| R8 | `Link Block 14` (Scents page "Buy on Amazon" button) — **regression introduced by this session's own earlier button-consistency work** | Had no explicit base `color` property — only a hover color had ever been set. When `Text Block 31` (its child text, a class shared with the homepage/Shop All buttons) had its own color stripped during the B1 hover-bug fix (see font-and-button-consistency PR), it lost its only color source on *this* button specifically, since the parent had nothing to inherit. Rendered as a plain unstyled blue hyperlink — confirmed via Greg's screenshot | FIXED — added `color: #1a1a1a` to `Link Block 14`'s base state, matching the rest of the unified button family. **Confirmed working by Greg on laptop** |
+| R9 | `Image 12` (product card images on Scents template) | No fixed aspect ratio (`height: auto`) — each product photo rendered at whatever size its own source image's natural proportions dictated, making some cards' images visibly smaller/differently-shaped than others (worst on Refill Pouch products) | FIXED — added `aspect-ratio: 1 / 1` + `height: 100%`. **Partially effective** — improved consistency but the underlying R6b grid issue was still distorting cell width/sizing for overflow items independent of this fix |
+
+**Open, unresolved, deferred to next session:**
+- **R6b (products-grid overflow layout) not fully fixed** — the `grid-template-rows` fix did not resolve the malformed-cell issue on scents with more than 4 products (confirmed by Greg after republishing). Needs a fresh diagnostic pass, likely with direct visual/live inspector access rather than further Data-API-only guessing.
+- **R10 (new) — `Link Block 14` reported "whited out" on mobile specifically**, inconsistent with the other buttons. Checked exhaustively via the Data API: no breakpoint overrides (`medium`/`small`/`tiny`) on `Link Block 14` at any pseudo-state (base, hover, active, focus), and the global `a` tag has no breakpoint overrides either — structurally this button should render identically at every screen size, contradicting what Greg is seeing live. Could not identify a technical cause through this API; likely needs a live mobile device inspector session (e.g. Safari's remote Web Inspector) rather than further backend-only checking.
+- **R1/R7b (header image crop)** — second attempt made (`75% 30%`), not yet confirmed live.
+
+**Recurring pattern this session:** several fixes confirmed correct via the Data API's own read-back did not match what actually rendered live for Greg (R1's first attempt, R6b, R10). Worth treating "confirmed via API" and "confirmed via live visual test" as two distinct, non-interchangeable levels of confidence going forward — the API accurately reflects what *will* be sent to the browser, but does not guarantee how it renders in every real-world context.
+
 ## Known issues — Webflow Designer API constraints (found 2026-08-20)
 
 Discovered while attempting to build an interactive category filter on the Shop All page. All three blocked a no-code/low-code single-page tab approach; noting them so a future session doesn't rediscover the same walls.
@@ -41,6 +75,42 @@ Discovered while attempting to build an interactive category filter on the Shop 
 | W7 | Homepage — Find Your Scent | "Explore Scent →" button was `href="#"` and the tile image had no link at all | FIXED 2026-08-20 — button and a new dedicated tile-image link both bound to the Scents collection's `amazon-url` field (misleadingly named — its help text confirms it was always meant to hold this internal link, not an Amazon URL), now populated with the correct `forandagainstbodycare.com/scents/{slug}` link per scent. An earlier fix in this same session used a `collectionPage` link guess instead of this field — corrected once the intended field was discovered. |
 | W8 | Homepage — Nav Bar | "Buy On Amazon" button linked internally to `/shop` instead of the Amazon storefront | FIXED 2026-08-20 — now points to the tagged storefront URL, opens in new tab, applies site-wide since it's a component default |
 | W9 | Homepage — Shop By Category | All 4 category tiles (Body Wash, Body Lotion, Deodorant, Refill Pouches) had no link at all | FIXED 2026-08-20 — each tile now wraps its image in a dedicated link routing to its matching new category page (`/shop-body-wash`, `/shop-body-lotion`, `/shop-deodorant`); the Refill Pouches tile routes to `/shop` (unfiltered) since refills merge into their base category rather than having their own category — see the 2026-08-19 session's Conditioner/refill scoping decision. |
+| W10 | Legal pages (Returns, Privacy, Terms) — `Heading 10` | Main page title styled with `color: white` — likely invisible depending on the page background | OPEN — flagged during 2026-08-20 font audit, not fixed since it's a color issue, not a font issue |
+
+## Known issues — site typography (found + fixed 2026-08-20, font audit)
+
+Per `docs/brand/voice.md`: Headlines → Fortika, Sub-headlines → Inter Bold, Body → Inter Regular. Audit covered every page with unique content (Home, Shop All, all 5 category pages, Scents template, Best Sellers page, Contact, Returns/Privacy/Terms).
+
+| # | Surface | Issue | Status |
+|---|---|---|---|
+| F1 | Site-wide | Base `<body>` tag defaulted to Arial, not Inter — root cause of most inconsistency below, since many text elements have no explicit font-family and fell through to this | FIXED — body tag font-family set to Inter |
+| F2 | Homepage H1 ("Personal Care That Works With Your Body") | Rendered in Inter, not Fortika (headline) | FIXED — `.heading` class and its inner `.italic-text` span both set to Fortika. **Note:** immediately after this fix, the Designer canvas rendered this specific heading's words with no spaces between them, despite the underlying text content being one normal string ("Personal Care That Works With Your Body") — confirmed not a font-wide issue since other Fortika headings render spacing correctly. Greg confirmed it looks correct in practice; logged as a likely Designer-canvas-only rendering quirk with the custom OTF file, not a real bug. |
+| F3 | Homepage H2 ("Signature Scents. Thoughtful Formulas.") | Split-font bug — first half wrapped in a Fortika span, second half was a bare string inheriting Arial from body, so one heading rendered in two fonts | FIXED — `.heading-2` class itself set to Fortika, so the bare text now matches |
+| F4 | Best Sellers page H1, Contact page H3 ("Contact Us") | No font styling applied at all (unstyled default elements) | FIXED — both given the existing `Heading 13` class (already Fortika) |
+| F5 | Returns/Privacy/Terms (shared template, same element IDs across all three) — `Heading 10` | Main page title had no font-family | FIXED — set to Fortika |
+| F6 | Returns/Privacy/Terms — `Heading 11` (6 recurring sub-section headers per page: "Returns," "Shipping," etc.) | No font-family or weight | FIXED — set to Inter, font-weight 700 (sub-headline spec) |
+| F7 | `Text Block 15`, base `Text Block` class, `Text Block 66`/`Text Block 67` (Best Sellers page button text) | Explicit `font-family: Arial` overrides that survived even after the body tag fix | FIXED — all set to Inter |
+
+**Already correct, no fix needed:** Find Your Scent heading, homepage Best Sellers section heading, Shop By Category heading, Scents template heading, and all Shop All/category page headings were already Fortika via their own class or an inner span.
+
+**Not checked:** `Heading 4`, `Heading 5`, `Heading 9` style classes exist but weren't found rendering on any page checked (Home, Shop All, 5 category pages, Scents template, Products template, Best Sellers, Contact, Returns/Privacy/Terms) or inside the Nav Bar/Footer components — likely orphaned styles from earlier iteration. Left untouched since fixing unused styles has no visible effect; worth a cleanup pass someday if confirmed genuinely unused.
+
+## Known issues — product button consistency (found + fixed 2026-08-20)
+
+Four different "Buy on Amazon" button styles existed across the site with no shared pattern:
+
+| Button class | Used on | Before | After |
+|---|---|---|---|
+| `Link Block 6` | Homepage Best Sellers section | Outline, black border, no hover; see B1 below for a deeper bug found here | Outline/hover-fill pattern matching the other three, plus B1 fixed |
+| `Link Block 7` | Shop All + all 5 category pages | Solid black background always, no hover, "amazon" word uncolored | Converted to outline/hover-fill pattern; "amazon" word now orange/bold/italic to match the homepage treatment |
+| `Link Block 14` | Scents template CTA | Outline with hover-fill already (the "transition" look Greg specifically liked) | Unchanged except an explicit `transition` property added for guaranteed smoothness |
+| `Link Block 16` | Dedicated Best Sellers page (`/best-sellers`) | Solid black background always, Arial font bug on both text spans | Converted to outline/hover-fill pattern; Arial → Inter |
+
+**Resulting shared pattern:** transparent background, 1px solid `#1a1a1a` border, dark text (`#1a1a1a`) by default, fills to `#1a1a1a` background with `#f5f2ec` text on hover, `background-color 0.2s ease, color 0.2s ease` transition. The orange/italic/bold "amazon" word treatment from the homepage button is now applied consistently on every button that includes it.
+
+**B1 — Hidden per-element hover bug on `Link Block 6` (found + fixed 2026-08-20, after Greg tested live):** the initial fix only added a hover state to the button (`Link Block 6`) itself, assuming its "Shop Now" child text would inherit the color change. In fact the child (`Text Block 31`) had its own hardcoded `color: black` at rest **and its own separate `:hover` pseudo** (`color: #f5f2ec`) completely disconnected from the parent button — so hovering the button darkened the background, but the text only turned white if the mouse was directly over the text glyphs themselves, not anywhere else on the button. Fixed by moving the color logic onto `Link Block 6` (base `color: #1a1a1a`, hover `color: #f5f2ec`) and stripping `Text Block 31`'s own color entirely so it inherits from the ancestor's hover state correctly — the same pattern already used successfully for `Text Block 45`/`Text Block 67` on the other two buttons. **Confirmed `Text Block 45` and `Text Block 67` do NOT have this same hidden hover pseudo** — checked directly, only `Link Block 6`'s child had it.
+
+**Implementation note:** child text spans that need to change color on the parent's hover (e.g. "Shop Now") must have **no explicit color of their own, in either the base or hover pseudo state** — any color rule on the child, even a hover-scoped one, will override or disconnect from the parent's own hover-driven inheritance. This is the root cause of B1 and worth checking for on any future button/card component with similar hover-fill patterns.
 
 ## Known issues — homepage Best Sellers carousel (found + fixed 2026-08-20)
 

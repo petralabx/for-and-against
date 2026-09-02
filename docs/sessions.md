@@ -30,7 +30,7 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 ## 2026-09-02 — Remount PRs #13, #19, #21 onto current main
 
 - **Who:** cos@petrasoap.com + Cursor Cloud Agent
-- **PR:** n/a (`cip/remount-13-19-21`); remounts #13, #19, and #21 — does not rewrite those heads
+- **PR:** [#25](https://github.com/petralabx/for-and-against/pull/25) (`cip/remount-13-19-21`); remounts #13, #19, and #21 — does not rewrite those heads
 - **Done:** Remounted gregmpetra's unique docs from PR #13 (`f824f641` paid-ads Phase 1/2 + session), PR #19 (`7a63a78f` typography/button learnings + session), and PR #21 (`bd12bb76` daily summary + responsiveness learnings + session) onto a new branch from current `origin/main`. Later main entries (including the 2026-08-25/26 grid work, compliance remount, and already-landed carousel session) were kept. `#19`/`#21` `docs/learnings.md` and all three `docs/sessions.md` overlaps resolved by keeping both gregmpetra's new sections and current main. No site code, no force-push.
 - **Next:** CIP closes #13, #19, and #21 as superseded after this remount PR exists. Review + merge this remount; agent will not merge or close the old PRs.
 - **Watch:** Live heads of `docs/google-ads-phase1-strategy` (#13), `site/font-and-button-consistency` (#19), and `site/responsive-fixes-scents-shop` (#21) must stay untouched. Later G1–G5 grid notes on main supersede some of #21's still-open R6b diagnosis — both sections are retained so the original write-up is not dropped.

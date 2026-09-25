@@ -2,6 +2,18 @@
 
 Entry point for any agent or collaborator working in this repo. Read this before generating anything.
 
+## Mission Control handshake (Claude Code and every agent)
+
+Before first edit or any PR_CREATE on `petralabx/for-and-against`:
+
+1. **Search** projects, buckets and TASK-* first (`mc_search_tasks` / `mc_suggest_work`: branch, title, runId). Reuse a matching open TASK.
+2. **Create only on a real miss**: `mc_create_task` in the registry default bucket (`BKT-INFRA`, from PLX_MC `config/tracked-repos-registry.json`; do not hardcode another prod bucket). Create a project/bucket only if it is truly missing. Never create a TASK to escape incomplete evidence on a live checkout.
+3. **Checkout**: `mc_checkout_task { taskId, repo: "petralabx/for-and-against" }` on PLX-MC-Hub. Confirm `taskId` matches and `actor.repo` is `petralabx/for-and-against`. Copy `prBodyLine` exactly. HTTP fallback when Hub MCP tools are missing:
+   `COMPLIANCE_CAPTURE=1 MC_REPO=petralabx/for-and-against MC_TASK_ID=TASK-N node scripts/compliance-checkout.mjs` (reads `MC_BASE_URL`, `MC_MCP_API_KEY`, `MC_OPERATOR_EMAIL`, `MC_ACCOUNTABLE` from the environment; never echo the key).
+4. **Stamp at PR open**: put the `MC-Checkout: dsp_…` line in the body at `gh pr create` time (the compliance gate reads the body on opened/synchronize/reopened only, not on edits). Never invent a `dsp_*`, never write `MC-Checkout: pending`, never `--no-verify`, never an empty commit or push to re-trigger CI. If the body must change after open, ask CIP to close/reopen.
+5. **Last commit → `mc_complete_task`** (summary + verificationCommands + rollback) **→ freeze**. CIP lands; agents never merge. Next slice = new branch from the integration branch.
+6. If Hub MCP and the HTTP fallback both fail: stop; CoS/CIP paste `prBodyLine`.
+
 ## What this repo is
 
 Versioned source of truth for **For & Against** brand knowledge, product data, channel playbooks, approved copy, and Webflow site ops (forandagainstbodycare.com). Amazon Store + Webflow are the live surfaces this repo supports.
@@ -29,7 +41,7 @@ Premium body care positioned as the accessible-luxury alternative to Salt & Ston
 3. **Claims compliance:** only claims listed as approved in `docs/compliance/claims.md`. No drug claims (treats/cures/heals). Avoid "All Natural" / "Non-Toxic" in new copy.
 4. **API keys and secrets never enter this repo** — GitHub Actions Secrets only.
 5. Do not invent Webflow CMS field names — use `site/cms-schema.md` and fetch the live schema when incomplete.
-6. Import MC task discipline: every agent PR stamps `MC-Checkout: <task-id>`.
+6. Import MC task discipline: every agent PR carries the Hub-minted `MC-Checkout: dsp_…` line (see Mission Control handshake above).
 
 ## Workflow discipline
 

@@ -27,6 +27,14 @@ Keep entries short. Deep write-ups belong in `docs/learnings.md` (experiments/is
 
 ---
 
+## 2026-10-21 — Amazon Sponsored Products rebuild documented
+
+- **Who:** Greg + Claude (claude.ai, GitHub MCP connector)
+- **PR:** see `docs/amazon-sp-campaign-rebuild-2026-10` branch
+- **Done:** Added `docs/channels/amazon-sponsored-products.md` — the October rebuild of the SP account as bulk uploads: one SKU per ad group, scent-exact campaigns separate from auto Discovery, Brand Defense, and new Lotion, Deodorant and Hand Wash campaigns. Lotion and Deodorant (Nov 1 start) are already uploaded; Body Wash ×4, Brand Defense and Hand Wash are re-uploading with an Oct 26 start after the first upload failed on a past start date.
+- **Next:** Pause the two legacy body wash campaigns when the Oct 26 set goes live. Enable S&V body wash campaigns after FNA306-500 restock. Fix FNA606-500 (S&V lotion) ineligibility. Run a deodorant Jungle Scout pull.
+- **Watch:** No break-even/target ACoS figures in the doc by design (derived from COGS, per `AGENTS.md`). The bulk upload xlsx files are not committed (binary); the doc lists every keyword, bid and negative needed to rebuild them. `For_Against_Product_Information.xlsx` in the Claude project is out of date — hand wash listings were updated on 2026-10-20 and S&V lotion still shows no ASIN.
+
 ## 2026-09-02 — Remount PRs #13, #19, #21 onto current main
 
 - **Who:** cos@petrasoap.com + Cursor Cloud Agent

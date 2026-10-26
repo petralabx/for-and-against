@@ -1,0 +1,4 @@
+
+# Local worktrees (workstream protocol, TASK-3953)
+.worktrees/
+.claude/worktrees/

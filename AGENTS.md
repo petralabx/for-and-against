@@ -4,15 +4,22 @@ Entry point for any agent or collaborator working in this repo. Read this before
 
 ## Mission Control handshake (Claude Code and every agent)
 
-Before first edit or any PR_CREATE on `petralabx/for-and-against`:
+<!-- plx-mc:handshake:start -->
+Generated from PLX_MC [`config/governance-contract.yaml`](https://github.com/petralabx/PLX_MC/blob/main/config/governance-contract.yaml) by `scripts/generate-governance-surfaces.py --fleet`. Do not edit this block: change the contract and regenerate.
 
-1. **Search** projects, buckets and TASK-* first (`mc_search_tasks` / `mc_suggest_work`: branch, title, runId). Reuse a matching open TASK.
-2. **Create only on a real miss**: `mc_create_task` in the registry default bucket (`BKT-INFRA`, from PLX_MC `config/tracked-repos-registry.json`; do not hardcode another prod bucket). Create a project/bucket only if it is truly missing. Never create a TASK to escape incomplete evidence on a live checkout.
-3. **Checkout**: `mc_checkout_task { taskId, repo: "petralabx/for-and-against" }` on PLX-MC-Hub. Confirm `taskId` matches and `actor.repo` is `petralabx/for-and-against`. Copy `prBodyLine` exactly. HTTP fallback when Hub MCP tools are missing:
-   `COMPLIANCE_CAPTURE=1 MC_REPO=petralabx/for-and-against MC_TASK_ID=TASK-N node scripts/compliance-checkout.mjs` (reads `MC_BASE_URL`, `MC_MCP_API_KEY`, `MC_OPERATOR_EMAIL`, `MC_ACCOUNTABLE` from the environment; never echo the key).
-4. **Stamp at PR open**: put the `MC-Checkout: dsp_…` line in the body at `gh pr create` time (the compliance gate reads the body on opened/synchronize/reopened only, not on edits). Never invent a `dsp_*`, never write `MC-Checkout: pending`, never `--no-verify`, never an empty commit or push to re-trigger CI. If the body must change after open, ask CIP to close/reopen.
-5. **Last commit → `mc_complete_task`** (summary + verificationCommands + rollback) **→ freeze**. Anyone with write access then lands the green PR with a merge commit; never squash, never bypass. A PR that touches money, migrations or workflows lands only with a signed MC merge approval of its exact head (Vince, 2026-10-25, TASK-3901). Next slice = new branch from the integration branch.
-6. If Hub MCP and the HTTP fallback both fail: stop; CoS/CIP paste `prBodyLine`.
+Before the first edit or any PR on `petralabx/for-and-against`:
+
+1. Search projects, buckets and TASK-* first (mc_search_tasks: branch, title, runId). Create a task only on a real miss, with mc_create_task in BKT-INFRA. Never create a task to escape incomplete evidence on a live checkout.
+2. Check out with mc_checkout_task, passing repo `petralabx/for-and-against`, your own `runtime/lane` as agent, and your branch. Confirm the returned taskId and that actor.repo is `petralabx/for-and-against`. Copy prBodyLine exactly.
+3. Never invent a dsp_* id, never write `MC-Checkout: pending`, and never push with --no-verify. Without the MC tools, check out over HTTP: `COMPLIANCE_CAPTURE=1 MC_REPO=petralabx/for-and-against MC_TASK_ID=TASK-N node scripts/compliance-checkout.mjs`. If that fails too, stop and ask CoS or CIP to paste the prBodyLine.
+4. End every commit with Agent, On-Behalf-Of and MC-Checkout as its last three lines. Name the TASK id in the PR title or branch.
+5. Save evidence with mc_save_evidence before you open the PR, and put the MC-Checkout line in the PR body when you open it.
+6. After you fix a PR body, re-run the failed compliance job. Never push an empty commit, and never close and reopen a PR, to restart a check.
+7. After the last commit, call mc_complete_task with verificationCommands, rollback and the PR link. Then move the task's stage, or say why you cannot.
+8. Mark a green PR ready and stop: only CIP's merge-queue session arms auto-merge or merges, with a merge commit into `main`. A PR that touches money, migrations or workflows, or reverts merged work, needs a signed MC merge approval of its exact head (mc_request_approval, merge scope).
+
+- A plan that adds a project, or two or more buckets, goes through a draft: mc_save_draft, then mc_submit_draft. Its author accepts it in Mission Control.
+<!-- plx-mc:handshake:end -->
 
 ## Workstream protocol
 
